@@ -1,15 +1,15 @@
 {
-  "versionCode": 15,
-  "versionName": "2.9.4",
+  "versionCode": 16,
+  "versionName": "2.9.5",
   "apkUrl": "https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main/app-release.apk",
-  "size": 11268385,
-  "sha256": "0da1f9b4f28414b182c8b8478d9969f1b50ddaa19c52b12cd5f030b5601c2577",
+  "size": 11269461,
+  "sha256": "c4ee3405fde90fd3239c349ad3ef5e6fefa7117be76b54760acb41bdd70a525c",
   "force": false,
-  "publishedAt": "2026-10-28 20:58",
+  "publishedAt": "2026-10-28 21:28",
   "notes": [
-    "作业计划与远程更新改为 GitHub 主通道（当前仓库）",
-    "GitHub 不可达时自动回退原站点，两条通道都能取到清单与安装包",
-    "安装包下载失败自动换通道重试，每个通道独立校验 sha256/包名/版本/签名",
-    "功能与界面无变化"
+    "设置页把「已登录信息」与「保存」合并成一张卡片",
+    "卡片顶部显示账号状态：状态徽标 + 账号名 + 已登录/未登录胶囊",
+    "下方细分隔线接两个按钮，均为全站统一的「框框」样式",
+    "功能与逻辑无变化，仅账号信息与保存按钮合并为一张卡片"
   ]
 }
