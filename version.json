@@ -1,0 +1,15 @@
+{
+  "versionCode": 15,
+  "versionName": "2.9.4",
+  "apkUrl": "https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main/app-release.apk",
+  "size": 11268385,
+  "sha256": "0da1f9b4f28414b182c8b8478d9969f1b50ddaa19c52b12cd5f030b5601c2577",
+  "force": false,
+  "publishedAt": "2026-10-28 20:58",
+  "notes": [
+    "作业计划与远程更新改为 GitHub 主通道（当前仓库）",
+    "GitHub 不可达时自动回退原站点，两条通道都能取到清单与安装包",
+    "安装包下载失败自动换通道重试，每个通道独立校验 sha256/包名/版本/签名",
+    "功能与界面无变化"
+  ]
+}
