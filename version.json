@@ -1,15 +1,15 @@
 {
-  "versionCode": 16,
-  "versionName": "2.9.5",
+  "versionCode": 17,
+  "versionName": "2.9.6",
   "apkUrl": "https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main/app-release.apk",
-  "size": 11269461,
-  "sha256": "c4ee3405fde90fd3239c349ad3ef5e6fefa7117be76b54760acb41bdd70a525c",
+  "size": 11269365,
+  "sha256": "dae789e90b42287da7502ef1a8681b684d948a5aa51b8c9b90050eeab015c317",
   "force": false,
-  "publishedAt": "2026-10-28 21:28",
+  "publishedAt": "2026-10-28 22:33",
   "notes": [
-    "设置页把「已登录信息」与「保存」合并成一张卡片",
-    "卡片顶部显示账号状态：状态徽标 + 账号名 + 已登录/未登录胶囊",
-    "下方细分隔线接两个按钮，均为全站统一的「框框」样式",
-    "功能与逻辑无变化，仅账号信息与保存按钮合并为一张卡片"
+    "班次配色：BZ 绿与 YZ 蓝明显区分（YZ 由青 #0D9488 改为蓝 #0284C7）",
+    "BZ（绿）与 YZ（蓝）色相拉开 56°，日历小圆点、图例、桌面小部件一眼可辨",
+    "其余班次颜色不变：BJ3 琥珀、BJ1 橙红、YJ1 靛蓝、YJ3 紫",
+    "功能与逻辑无变化，仅配色调整"
   ]
 }
