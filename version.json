@@ -1,16 +1,14 @@
 {
-  "versionCode": 18,
-  "versionName": "2.9.7",
+  "versionCode": 19,
+  "versionName": "2.9.8",
   "apkUrl": "https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main/app-release.apk",
-  "size": 11270993,
-  "sha256": "06821d969201cb7c199f892cf0da3d86b61c66b3f4d5290cec2a07c395342cdf",
+  "size": 11271021,
+  "sha256": "f23f1215035d6176efd119f1c7d114ea42b9d07ac873a02823ad018431d191a3",
   "force": false,
-  "publishedAt": "2026-10-28 22:52",
+  "publishedAt": "2026-10-28 23:00",
   "notes": [
-    "修复：启动时自动登录真正生效（只登录，不拉排班）",
-    "排班仍按原计划更新：运行期间每 2 小时一次 + 日历页「刷新」",
-    "设置页：保存与账号卡片移到「平台账号」下方",
-    "设置页：作业计划与打卡提醒新增独立保存按钮，改提醒时间不必重填密码",
-    "输入框失焦后光标消失：点空白处或按键盘「完成」都会收起键盘"
+    "计划页：每条计划的地点（站点）单独占一行，不再与时间/类别/备注挤在一起",
+    "地点过长时可占两行，不会被其他标签挤压变形",
+    "其余内容与逻辑无变化"
   ]
 }
