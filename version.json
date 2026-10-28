@@ -1,15 +1,16 @@
 {
-  "versionCode": 17,
-  "versionName": "2.9.6",
+  "versionCode": 18,
+  "versionName": "2.9.7",
   "apkUrl": "https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main/app-release.apk",
-  "size": 11269365,
-  "sha256": "dae789e90b42287da7502ef1a8681b684d948a5aa51b8c9b90050eeab015c317",
+  "size": 11270993,
+  "sha256": "06821d969201cb7c199f892cf0da3d86b61c66b3f4d5290cec2a07c395342cdf",
   "force": false,
-  "publishedAt": "2026-10-28 22:33",
+  "publishedAt": "2026-10-28 22:52",
   "notes": [
-    "班次配色：BZ 绿与 YZ 蓝明显区分（YZ 由青 #0D9488 改为蓝 #0284C7）",
-    "BZ（绿）与 YZ（蓝）色相拉开 56°，日历小圆点、图例、桌面小部件一眼可辨",
-    "其余班次颜色不变：BJ3 琥珀、BJ1 橙红、YJ1 靛蓝、YJ3 紫",
-    "功能与逻辑无变化，仅配色调整"
+    "修复：启动时自动登录真正生效（只登录，不拉排班）",
+    "排班仍按原计划更新：运行期间每 2 小时一次 + 日历页「刷新」",
+    "设置页：保存与账号卡片移到「平台账号」下方",
+    "设置页：作业计划与打卡提醒新增独立保存按钮，改提醒时间不必重填密码",
+    "输入框失焦后光标消失：点空白处或按键盘「完成」都会收起键盘"
   ]
 }
