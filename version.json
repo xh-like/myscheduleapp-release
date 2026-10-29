@@ -1,15 +1,15 @@
 {
-  "versionCode": 31,
-  "versionName": "2.9.20",
+  "versionCode": 32,
+  "versionName": "2.9.21",
   "apkUrl": "https://schedule-plans.app.workbuddy.host/app-release.apk?sharecode=NWSJZFXACD",
-  "size": 11307982,
-  "sha256": "bc7dd21bd03fb0993bf4aae8d59905712b7856b0c91c6a61a26bbf59fcce7380",
+  "size": 11306790,
+  "sha256": "21e7cf284d1b9ce5294785c07cdb76af89a3e2d813e1ab4bf5a9b238b9090aac",
   "force": false,
-  "publishedAt": "2026-10-29 18:42",
+  "publishedAt": "2026-10-29 18:46",
   "notes": [
-    "点击底部标签不再闪出方块（去掉默认水波纹），高亮只由椭圆承担",
-    "椭圆高亮收进悬浮栏内：比标签略宽但左右留边、上下居中，不再顶到圆弧边框",
-    "悬浮栏改为不透光的磨砂玻璃：背后的日历内容完全看不到，只保留磨砂颗粒、明暗层次与高光描边",
-    "深色模式自动适配，其余功能不变"
+    "小部件顶部月份标题真正居中（同步时间不再挤在右侧占位）",
+    "同步时间移到月份标题下方、居中小字显示",
+    "去掉标题下方那行重复的小字年月日，顶部更清爽",
+    "其余功能与数据逻辑不变"
   ]
 }
