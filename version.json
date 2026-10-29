@@ -1,15 +1,15 @@
 {
-  "versionCode": 35,
-  "versionName": "2.9.24",
+  "versionCode": 36,
+  "versionName": "2.9.25",
   "apkUrl": "https://schedule-plans.app.workbuddy.host/app-release.apk?sharecode=NWSJZFXACD",
-  "size": 11304470,
-  "sha256": "b6512e0630f889ab6d06e7ca70ea041d0674bdc20813b9880c445cab289eeb3b",
+  "size": 11872255,
+  "sha256": "1496496eb9b0f40eeacc2cb5e9a92ab92c3032dbe8731ec3d065e420b5a2629f",
   "force": false,
-  "publishedAt": "2026-10-29 22:08",
+  "publishedAt": "2026-10-29 22:24",
   "notes": [
-    "底部悬浮栏改为半透明玻璃：背后的日历能透出来，表面只留一层磨砂颗粒与高光",
-    "悬浮栏变矮：栏高 64dp → 56dp，图标 24dp → 22dp，上下留白收窄",
-    "选中仍只显示蓝色图标文字，无椭圆、无矩形水波纹",
-    "胶囊圆角随高度自动收敛，缩放跳动保留"
+    "悬浮栏改成真正的背景玻璃：把页面内容实时模糊后透过栏显示，能看到背后日历/列表的模糊轮廓",
+    "实现方式升级到 Compose 1.7 的离屏图层 + 高斯模糊（Android 12 及以上）",
+    "Android 12 以下设备自动退回原来的半透明玻璃，不会闪退",
+    "玻璃层更淡、颗粒更轻，选中仍是蓝色图标文字"
   ]
 }
