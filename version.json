@@ -1,15 +1,15 @@
 {
-  "versionCode": 41,
-  "versionName": "2.9.30",
+  "versionCode": 61,
+  "versionName": "3.0.0",
   "apkUrl": "https://schedule-plans.app.workbuddy.host/app-release.apk?sharecode=NWSJZFXACD",
-  "size": 11880447,
-  "sha256": "935f0c8985cb0b81b5eee1018fc733c606c3865befa27696aa9fe383ea41e9d5",
+  "size": 11899616,
+  "sha256": "4c7ffeee03982ae3b54a8693c1c62c567d521d28cbabf95c66834d4f984b52f9",
   "force": false,
-  "publishedAt": "2026-10-29 23:11",
+  "publishedAt": "2026-10-30 00:55",
   "notes": [
-    "悬浮栏改回 iOS 系统那种半透明毛玻璃：去掉彩色光球和斜向扫光，只留背后内容的模糊影像",
-    "玻璃更淡更透，顶部一道 1dp 高光、一圈细描边，不再有彩色渐变",
-    "模糊半径加大并做提饱和处理，背后的颜色更鲜、边缘更柔，接近 iOS 的 UIBlurEffect",
-    "升级后磨砂玻璃会自动恢复（旧的崩溃标记作废），不用再去设置里手动打开"
+    "悬浮栏升级为 iOS 式「透过玻璃看」：接入 Haze 库，对背后内容做真正的背景模糊（不再依赖截图）",
+    "玻璃用 20dp 模糊 + 半透明玻璃色，背后内容被柔化后透出，配合顶部高光与厚玻璃描边，接近 iOS 底部栏",
+    "保留崩溃守卫：若个别机型对 RenderEffect 敏感，自动退回纯色玻璃，设置页可手动重开「悬浮栏磨砂玻璃」",
+    "内容与悬浮栏合并回同一渲染层，整体更稳定、更省资源"
   ]
 }
