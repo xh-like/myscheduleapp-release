@@ -1,16 +1,14 @@
 {
-  "versionCode": 20,
-  "versionName": "2.9.9",
-  "apkUrl": "https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main/app-release.apk",
-  "size": 11272689,
-  "sha256": "fee19aff96df87ed65b6bd745afaf2b0b71e6c1c7ed0ffc8bdaebb241c84b7f9",
+  "versionCode": 21,
+  "versionName": "2.9.10",
+  "apkUrl": "https://cdn.jsdelivr.net/gh/xh-like/myscheduleapp-release@main/app-release.apk",
+  "size": 11273017,
+  "sha256": "c50a2d76bc01e68bc540d8daacc4f968314012bd5f3fc8972b45ca8cd4deaf21",
   "force": false,
-  "publishedAt": "2026-10-29 09:25",
+  "publishedAt": "2026-10-29 10:20",
   "notes": [
-    "计划自动比对固定为每天 12:00、17:00，设置页不再提供修改入口",
-    "关闭 App 也能准时比对：改由系统精确闹钟唤醒，重启手机或应用更新后会自动重排",
-    "只有云端与本地存在差异时才写入，无变化不覆盖本地数据",
-    "日志按日期列出改动明细：新增 / 删除 / 修改（字段 旧值→新值）",
-    "修复表格中间插行、删行导致整批计划被误报为「修改」的问题"
+    "计划、更新清单、安装包改用 jsDelivr CDN 优先下载，GitHub 直连次之，WorkBuddy 站点兜底",
+    "解决部分网络下 raw.githubusercontent.com 被解析到 127.0.0.1、导致计划和更新拉不到的问题",
+    "云端每 3 小时刷新计划后会同步刷新 CDN 缓存，手机端拿到的就是最新数据"
   ]
 }

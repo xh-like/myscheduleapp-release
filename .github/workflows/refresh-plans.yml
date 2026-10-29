@@ -61,12 +61,14 @@ jobs:
         run: python3 tools/gen_plans.py .plansrc plans.json
 
       - name: 有变化才提交并推送
+        id: commit
         if: steps.cred.outputs.ready == 'true'
         run: |
           set -e
           rm -rf .plansrc
           if git diff --quiet -- plans.json; then
             echo "plans.json 内容无变化，跳过提交"
+            echo "pushed=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
           git config user.name "plans-bot"
@@ -76,3 +78,13 @@ jobs:
           git commit -m "plans: 云端自动刷新 $(date '+%Y-%m-%d %H:%M')（${COUNT} 项）"
           git pull --rebase --autostash origin main || true
           git push origin HEAD:main
+          echo "pushed=true" >> "$GITHUB_OUTPUT"
+
+      # App 主通道走 jsDelivr，分支引用默认缓存 12 小时；提交后必须主动 purge，
+      # 否则手机端最长会落后半天。purge 失败不影响数据本身（GitHub 已是最新）。
+      - name: 刷新 jsDelivr CDN 缓存
+        if: steps.commit.outputs.pushed == 'true'
+        run: |
+          echo -n "purge plans.json: "
+          curl -s --max-time 25 "https://purge.jsdelivr.net/gh/xh-like/myscheduleapp-release@main/plans.json" || echo "(失败，非致命)"
+          echo
