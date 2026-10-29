@@ -3,11 +3,10 @@ name: 云端刷新排班计划数据
 # 每 3 小时从腾讯文档重新拉取《运维作业计划申请》，生成 plans.json 并提交到本仓库。
 # 运行在 GitHub 的机器上，不需要本机开机。
 #
-# 依赖的仓库 Secrets（Settings → Secrets and variables → Actions）：
-#   TDOC_CLIENT_ID       腾讯文档开放平台应用的 Client ID
-#   TDOC_CLIENT_SECRET   腾讯文档开放平台应用的 Client Secret
-#   TDOC_REFRESH_TOKEN   OAuth 授权拿到的 refresh_token
-# 未配置时任务会以「跳过」结束，不会报错、不会改动 plans.json。
+# 依赖的仓库 Secret（Settings → Secrets and variables → Actions）：
+#   TDOC_ACCESS_TOKEN   腾讯文档开放平台 access_token（Client-Id / Open-Id 自动从其 JWT 解析）
+# 未配置时本任务以「跳过」结束，不会报错、不会改动 plans.json。
+# 注意：access_token 有效期 30 天，到期前需要换新（脚本会在剩余不足 7 天时给出告警）。
 
 on:
   schedule:
@@ -27,9 +26,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       TZ: Asia/Shanghai
-      TDOC_CLIENT_ID: ${{ secrets.TDOC_CLIENT_ID }}
-      TDOC_CLIENT_SECRET: ${{ secrets.TDOC_CLIENT_SECRET }}
-      TDOC_REFRESH_TOKEN: ${{ secrets.TDOC_REFRESH_TOKEN }}
+      TDOC_ACCESS_TOKEN: ${{ secrets.TDOC_ACCESS_TOKEN }}
     steps:
       - name: 检出仓库
         uses: actions/checkout@v4
@@ -44,8 +41,8 @@ jobs:
       - name: 检查凭据是否已配置
         id: cred
         run: |
-          if [ -z "$TDOC_CLIENT_ID" ] || [ -z "$TDOC_CLIENT_SECRET" ] || [ -z "$TDOC_REFRESH_TOKEN" ]; then
-            echo "::notice::未配置腾讯文档开放平台凭据，本次跳过。请先添加 TDOC_CLIENT_ID / TDOC_CLIENT_SECRET / TDOC_REFRESH_TOKEN 三个 Secrets。"
+          if [ -z "$TDOC_ACCESS_TOKEN" ]; then
+            echo "::notice::未配置 Secret TDOC_ACCESS_TOKEN，本次跳过。"
             echo "ready=false" >> "$GITHUB_OUTPUT"
           else
             echo "ready=true" >> "$GITHUB_OUTPUT"

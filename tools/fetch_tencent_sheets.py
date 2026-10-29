@@ -1,132 +1,116 @@
 # -*- coding: utf-8 -*-
-"""在云端（GitHub Actions）拉取腾讯文档《运维作业计划申请》的两个月度子表并导出 CSV。
+"""云端（GitHub Actions）拉取腾讯文档《运维作业计划申请》的月度子表，导出为 CSV。
 
-与本地 tencentdocs.py 走同一个 MCP 端点，区别只在于凭据来源：
-  本地  = WorkBuddy 宿主签发的会话票据（127.0.0.1 网关，无法离开本机）
-  云端  = 腾讯文档开放平台应用（client_id / client_secret / refresh_token）
+与本地 tencentdocs.py 的区别只在鉴权：
+  本地 = WorkBuddy 宿主签发的会话票据（127.0.0.1 网关，离不开本机）
+  云端 = 腾讯文档开放平台 Access Token（三元组请求头：Access-Token / Client-Id / Open-Id）
 
-环境变量（GitHub Secrets）：
-  TDOC_CLIENT_ID
-  TDOC_CLIENT_SECRET
-  TDOC_REFRESH_TOKEN   一小时内会被本次刷新轮换，日志里会提示新值需回填
+Client-Id 与 Open-Id 直接从 Access Token（JWT）的 clt / sub 声明里取，所以只需配一个 Secret。
+
+环境变量：
+  TDOC_ACCESS_TOKEN   必填。腾讯文档开放平台 access_token
+  TDOC_CLIENT_ID      可选。覆盖 JWT 里的 clt
+  TDOC_OPEN_ID        可选。覆盖 JWT 里的 sub
+  TDOC_FILE_ID        可选。默认运维作业计划表
 
 用法：
   python3 fetch_tencent_sheets.py --out-dir .plansrc
-  python3 fetch_tencent_sheets.py --csv-dir <本地CSV目录>   # 调试用，跳过网络
+  python3 fetch_tencent_sheets.py --out-dir /tmp/x --csv-dir <本地CSV目录>   # 调试，不联网
 """
 import argparse
+import base64
+import csv
 import datetime
 import json
 import os
-import re
+import shutil
 import sys
 import urllib.error
 import urllib.parse
 import urllib.request
 
-FILE_ID = "DTXdqTGdLVEVQSGF6"
-MCP_URL = "https://docs.qq.com/api/v6/sheet/mcp"
-TOKEN_URL = "https://docs.qq.com/oauth/v2/token"
+DEFAULT_FILE_ID = "DTXdqTGdLVEVQSGF6"
+API_BASE = "https://docs.qq.com/openapi/spreadsheet/v3/files/"
+NCOL = 13  # A..M
+COL_LETTER = "M"
 
 
 def log(msg):
     print(msg, flush=True)
 
 
-def http(url, data=None, headers=None, timeout=90):
-    req = urllib.request.Request(url, data=data, headers=headers or {},
-                                 method="POST" if data else "GET")
+def die(msg):
+    log("::error::%s" % msg)
+    sys.exit(1)
+
+
+def jwt_claims(token):
+    try:
+        payload = token.split(".")[1]
+        payload += "=" * (-len(payload) % 4)
+        return json.loads(base64.urlsafe_b64decode(payload))
+    except Exception:  # noqa: BLE001
+        return {}
+
+
+def load_headers():
+    token = os.environ.get("TDOC_ACCESS_TOKEN", "").strip()
+    if not token:
+        die("缺少 TDOC_ACCESS_TOKEN")
+    claims = jwt_claims(token)
+    client_id = os.environ.get("TDOC_CLIENT_ID", "").strip() or claims.get("clt", "")
+    open_id = os.environ.get("TDOC_OPEN_ID", "").strip() or claims.get("sub", "")
+    if not client_id or not open_id:
+        die("无法从 token 解析 Client-Id / Open-Id，请显式设置 TDOC_CLIENT_ID 与 TDOC_OPEN_ID")
+
+    exp = claims.get("exp")
+    if exp:
+        left = datetime.datetime.fromtimestamp(float(exp)) - datetime.datetime.now()
+        if left.total_seconds() <= 0:
+            die("Access Token 已过期（%s），请重新授权后更新 Secret"
+                % datetime.datetime.fromtimestamp(float(exp)).strftime("%Y-%m-%d %H:%M"))
+        if left.days < 7:
+            log("::warning::Access Token 将于 %s 过期（剩 %d 天），请尽快换新"
+                % (datetime.datetime.fromtimestamp(float(exp)).strftime("%Y-%m-%d"), left.days))
+    return {"Access-Token": token, "Client-Id": client_id, "Open-Id": open_id}
+
+
+def api_get(headers, path, timeout=90):
+    url = API_BASE + path
+    req = urllib.request.Request(url, headers=headers)
     try:
         with urllib.request.urlopen(req, timeout=timeout) as resp:
-            return resp.read().decode("utf-8", errors="replace"), resp.headers.get("Content-Type", "")
+            obj = json.loads(resp.read().decode("utf-8", errors="replace"))
     except urllib.error.HTTPError as e:
         body = ""
         try:
-            body = e.read().decode("utf-8", errors="replace")[:400]
-        except Exception:
+            body = e.read().decode("utf-8", errors="replace")[:300]
+        except Exception:  # noqa: BLE001
             pass
-        raise RuntimeError("HTTP %s %s %s" % (e.code, e.reason, body))
-    except urllib.error.URLError as e:
-        raise RuntimeError("网络不可达: %s" % (e.reason,))
+        die("HTTP %s %s %s" % (e.code, e.reason, body))
+    except Exception as e:  # noqa: BLE001
+        die("请求失败 %s: %s" % (path, e))
+    if obj.get("code"):
+        die("接口返回错误 code=%s message=%s" % (obj.get("code"), obj.get("message")))
+    return obj
 
 
-def get_access_token():
-    """用 refresh_token 换 access_token；顺带报告轮换后的 refresh_token。"""
-    cid = os.environ.get("TDOC_CLIENT_ID", "").strip()
-    sec = os.environ.get("TDOC_CLIENT_SECRET", "").strip()
-    rt = os.environ.get("TDOC_REFRESH_TOKEN", "").strip()
-    if not (cid and sec and rt):
-        raise RuntimeError("缺少 TDOC_CLIENT_ID / TDOC_CLIENT_SECRET / TDOC_REFRESH_TOKEN")
-
-    qs = urllib.parse.urlencode({
-        "client_id": cid,
-        "client_secret": sec,
-        "grant_type": "refresh_token",
-        "refresh_token": rt,
-    })
-    raw, _ = http(TOKEN_URL + "?" + qs)
-    try:
-        obj = json.loads(raw)
-    except json.JSONDecodeError:
-        raise RuntimeError("换 token 返回非 JSON: %s" % raw[:300])
-    tok = obj.get("access_token")
-    if not tok:
-        raise RuntimeError("换 token 失败: %s" % raw[:300])
-
-    new_rt = obj.get("refresh_token")
-    if new_rt and new_rt != rt:
-        # 无法从 Actions 回写 Secrets，只能提示人工更新；旧 rt 通常仍有一段时间可用。
-        log("::warning::refresh_token 已轮换，请把新值更新到仓库 Secrets：%s" % new_rt)
-    log("access_token 获取成功，有效期 %s 秒" % obj.get("expires_in", "?"))
-    return tok
-
-
-def mcp_call(token, tool, arguments):
-    body = json.dumps({
-        "jsonrpc": "2.0", "id": 1, "method": "tools/call",
-        "params": {"name": tool, "arguments": arguments},
-    }).encode("utf-8")
-    raw, ctype = http(MCP_URL, data=body, headers={
-        "Content-Type": "application/json",
-        "Accept": "application/json, text/event-stream",
-        "Authorization": "Bearer " + token,
-        "User-Agent": "myscheduleapp-plans-bot",
-    })
-    if "text/event-stream" in ctype:
-        data_lines = [ln[5:].strip() for ln in raw.splitlines() if ln.startswith("data:")]
-        for chunk in reversed(data_lines):
-            try:
-                return json.loads(chunk)
-            except json.JSONDecodeError:
-                continue
-    try:
-        return json.loads(raw)
-    except json.JSONDecodeError:
-        raise RuntimeError("%s 返回非 JSON: %s" % (tool, raw[:300]))
-
-
-def dig(obj, key):
-    """在嵌套结构里递归找第一个叫 key 的字段（MCP 结果有二次转义字符串）。"""
-    if isinstance(obj, dict):
-        if key in obj and obj[key] not in (None, ""):
-            return obj[key]
-        for v in obj.values():
-            found = dig(v, key)
-            if found is not None:
-                return found
-    elif isinstance(obj, list):
-        for v in obj:
-            found = dig(v, key)
-            if found is not None:
-                return found
-    elif isinstance(obj, str):
-        s = obj.strip()
-        if s[:1] in "{[":
-            try:
-                return dig(json.loads(s), key)
-            except json.JSONDecodeError:
-                return None
-    return None
+def cell_text(cell):
+    """把 cellValue 的三种形态（text / number / time）转成字符串。"""
+    cv = (cell or {}).get("cellValue") or {}
+    if "text" in cv:
+        return (cv.get("text") or "").strip()
+    if "number" in cv:
+        n = cv["number"]
+        try:
+            f = float(n)
+            return str(int(f)) if f.is_integer() else str(f)
+        except (TypeError, ValueError):
+            return str(n)
+    t = cv.get("time")
+    if isinstance(t, dict):
+        return "%d年%d月%d日" % (t.get("year", 0), t.get("month", 0), t.get("day", 0))
+    return ""
 
 
 def sheet_label(d):
@@ -138,8 +122,7 @@ def target_labels(today=None):
     today = today or datetime.date.today()
     y, m = today.year, today.month
     nxt_y, nxt_m = (y + 1, 1) if m == 12 else (y, m + 1)
-    return [(sheet_label(datetime.date(y, m, 1)), datetime.date(y, m, 1)),
-            (sheet_label(datetime.date(nxt_y, nxt_m, 1)), datetime.date(nxt_y, nxt_m, 1))]
+    return [sheet_label(datetime.date(y, m, 1)), sheet_label(datetime.date(nxt_y, nxt_m, 1))]
 
 
 def main():
@@ -150,52 +133,57 @@ def main():
 
     os.makedirs(args.out_dir, exist_ok=True)
     want = target_labels()
-    log("目标子表：%s" % " / ".join(w[0] for w in want))
+    log("目标子表：%s" % " / ".join(want))
 
     if args.csv_dir:
-        import shutil
-        for name, _ in want:
+        for name in want:
             src = os.path.join(args.csv_dir, name + ".csv")
             if not os.path.exists(src):
-                raise RuntimeError("本地调试缺少 CSV: %s" % src)
+                die("本地调试缺少 CSV: %s" % src)
             shutil.copyfile(src, os.path.join(args.out_dir, name + ".csv"))
             log("调试模式拷入 %s" % name)
         return 0
 
-    token = get_access_token()
+    file_id = os.environ.get("TDOC_FILE_ID", "").strip() or DEFAULT_FILE_ID
+    headers = load_headers()
 
-    info = mcp_call(token, "get_sheet_info", {"file_id": FILE_ID})
-    sheets = dig(info, "sheets") or []
-    if not sheets:
-        raise RuntimeError("get_sheet_info 未返回 sheets: %s" % json.dumps(info, ensure_ascii=False)[:300])
-    by_name = {s.get("sheet_name"): s for s in sheets}
-    log("子表共 %d 个" % len(sheets))
+    meta = api_get(headers, urllib.parse.quote(file_id, safe=""))
+    props = meta.get("properties") or []
+    if not props:
+        die("未取到子表列表: %s" % json.dumps(meta, ensure_ascii=False)[:300])
+    by_title = {p.get("title"): p for p in props}
+    log("子表共 %d 个" % len(props))
 
-    for name, _ in want:
-        s = by_name.get(name)
-        if not s:
-            raise RuntimeError("找不到子表「%s」，现有：%s" % (name, list(by_name)))
-        sid = s["sheet_id"]
-        rows = int(s.get("row_count") or 224)
-        data = mcp_call(token, "get_cell_data", {
-            "file_id": FILE_ID, "sheet_id": sid,
-            "start_row": 0, "end_row": max(rows - 1, 0),
-            "start_col": 0, "end_col": 12, "return_csv": True,
-        })
-        csv_text = dig(data, "csv_data")
-        if not csv_text:
-            raise RuntimeError("子表「%s」未取到 csv_data: %s"
-                               % (name, json.dumps(data, ensure_ascii=False)[:300]))
+    for name in want:
+        p = by_title.get(name)
+        if not p:
+            die("找不到子表「%s」，现有：%s" % (name, list(by_title)))
+        sid = p["sheetId"]
+        rows_n = int(p.get("rowTotal") or 225)
+        rng = "A1:%s%d" % (COL_LETTER, rows_n)
+        q = urllib.parse.urlencode({"sheetId": sid})
+        obj = api_get(headers, "%s/values/%s?%s"
+                      % (urllib.parse.quote(file_id, safe=""), urllib.parse.quote(rng, safe="!:"), q))
+        rows = ((obj.get("gridData") or {}).get("rows")) or []
+        if not rows:
+            die("子表「%s」返回空 gridData" % name)
+
         path = os.path.join(args.out_dir, name + ".csv")
         with open(path, "w", encoding="utf-8", newline="") as f:
-            f.write(csv_text)
-        log("OK %s(%s) -> %d 字节" % (name, sid, len(csv_text.encode("utf-8"))))
+            w = csv.writer(f, lineterminator="\n")
+            for r in rows:
+                vals = [cell_text(c) for c in (r.get("values") or [])]
+                vals += [""] * (NCOL - len(vals))
+                w.writerow(vals[:NCOL])
+        log("OK %s(%s) %d 行 -> %s" % (name, sid, len(rows), path))
     return 0
 
 
 if __name__ == "__main__":
     try:
         sys.exit(main())
+    except SystemExit:
+        raise
     except Exception as e:  # noqa: BLE001
-        log("::error::%s" % e)
+        log("::error::未预期异常 %s: %s" % (type(e).__name__, e))
         sys.exit(1)
