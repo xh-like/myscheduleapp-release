@@ -1,0 +1,77 @@
+name: 云端刷新排班计划数据
+
+# 每 3 小时从腾讯文档重新拉取《运维作业计划申请》，生成 plans.json 并提交到本仓库。
+# 运行在 GitHub 的机器上，不需要本机开机。
+#
+# 依赖的仓库 Secrets（Settings → Secrets and variables → Actions）：
+#   TDOC_CLIENT_ID       腾讯文档开放平台应用的 Client ID
+#   TDOC_CLIENT_SECRET   腾讯文档开放平台应用的 Client Secret
+#   TDOC_REFRESH_TOKEN   OAuth 授权拿到的 refresh_token
+# 未配置时任务会以「跳过」结束，不会报错、不会改动 plans.json。
+
+on:
+  schedule:
+    # UTC 01/04/07/10/13/16/19/22 点 = 北京时间 09/12/15/18/21/00/03/06 点
+    - cron: '0 1,4,7,10,13,16,19,22 * * *'
+  workflow_dispatch:
+
+concurrency:
+  group: refresh-plans
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    env:
+      TZ: Asia/Shanghai
+      TDOC_CLIENT_ID: ${{ secrets.TDOC_CLIENT_ID }}
+      TDOC_CLIENT_SECRET: ${{ secrets.TDOC_CLIENT_SECRET }}
+      TDOC_REFRESH_TOKEN: ${{ secrets.TDOC_REFRESH_TOKEN }}
+    steps:
+      - name: 检出仓库
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 准备 Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 检查凭据是否已配置
+        id: cred
+        run: |
+          if [ -z "$TDOC_CLIENT_ID" ] || [ -z "$TDOC_CLIENT_SECRET" ] || [ -z "$TDOC_REFRESH_TOKEN" ]; then
+            echo "::notice::未配置腾讯文档开放平台凭据，本次跳过。请先添加 TDOC_CLIENT_ID / TDOC_CLIENT_SECRET / TDOC_REFRESH_TOKEN 三个 Secrets。"
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: 拉取腾讯文档子表
+        if: steps.cred.outputs.ready == 'true'
+        run: python3 tools/fetch_tencent_sheets.py --out-dir .plansrc
+
+      - name: 生成 plans.json
+        if: steps.cred.outputs.ready == 'true'
+        run: python3 tools/gen_plans.py .plansrc plans.json
+
+      - name: 有变化才提交并推送
+        if: steps.cred.outputs.ready == 'true'
+        run: |
+          set -e
+          rm -rf .plansrc
+          if git diff --quiet -- plans.json; then
+            echo "plans.json 内容无变化，跳过提交"
+            exit 0
+          fi
+          git config user.name "plans-bot"
+          git config user.email "plans-bot@users.noreply.github.com"
+          git add plans.json
+          COUNT=$(python3 -c "import json;print(json.load(open('plans.json'))['count'])")
+          git commit -m "plans: 云端自动刷新 $(date '+%Y-%m-%d %H:%M')（${COUNT} 项）"
+          git pull --rebase --autostash origin main || true
+          git push origin HEAD:main
