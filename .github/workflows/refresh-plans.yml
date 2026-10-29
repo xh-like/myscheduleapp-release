@@ -28,6 +28,8 @@ permissions:
 jobs:
   refresh:
     runs-on: ubuntu-latest
+    # purge 被限流时脚本要按服务器给的 reset 等待，留足 45 分钟
+    timeout-minutes: 45
     env:
       TZ: Asia/Shanghai
       TDOC_ACCESS_TOKEN: ${{ secrets.TDOC_ACCESS_TOKEN }}
@@ -83,23 +85,12 @@ jobs:
       # App 主通道走 jsDelivr，分支引用默认缓存 12 小时；提交后必须主动 purge，
       # 否则手机端最长会落后半天。purge 失败不影响数据本身（GitHub 已是最新）。
       - name: 刷新并校验 jsDelivr CDN 缓存
+        # 数据已经提交成功；CDN 刷新失败只是「手机端可能读到旧缓存」，
+        # 不应让整轮运行变红。失败会在步骤面板以警告色标出。
+        continue-on-error: true
         if: steps.commit.outputs.pushed == 'true'
         run: |
-          set -uo pipefail
-          WANT=$(python3 -c "import json;print(json.load(open('plans.json'))['updatedAt'])")
-          BASE="https://cdn.jsdelivr.net/gh/${{ github.repository }}@main"
-          # purge 返回 finished 只代表「已受理」，实际生效往往要第二轮；
-          # 只发一次 purge 会让手机端继续读最多 12 小时的旧数据，所以这里必须校验。
-          for i in 1 2 3 4 5 6; do
-            curl -s --max-time 25 \
-              "https://purge.jsdelivr.net/gh/${{ github.repository }}@main/plans.json" >/dev/null || true
-            sleep 5
-            GOT=$(curl -s --max-time 25 "$BASE/plans.json?cb=${RANDOM}${i}" \
-              | python3 -c "import sys,json;print(json.load(sys.stdin).get('updatedAt',''))" 2>/dev/null || echo "")
-            echo "第 ${i} 轮：CDN updatedAt=${GOT}（期望 ${WANT}）"
-            if [ "$GOT" = "$WANT" ]; then
-              echo "CDN 已刷新到最新"
-              exit 0
-            fi
-          done
-          echo "::warning::6 轮内未确认 CDN 刷新完成，数据可能滞后最长 12 小时"
+          # jsDelivr 的 purge 有配额，被限流时会返回 throttled + throttlingReset，
+          # 此时单次 purge 会被静默忽略、缓存继续保留 12 小时。脚本会按 reset 等待重试，
+          # 并以「CDN 字节 == 本地文件」为准判定成功。
+          python3 tools/purge_cdn.py plans.json --max-wait 1800

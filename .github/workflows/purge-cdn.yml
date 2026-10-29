@@ -1,13 +1,13 @@
 name: 发布新版本后刷新 CDN 缓存
 
-# jsDelivr 对 @main 这类分支引用默认缓存约 12 小时，且 purge 不是立即生效。
-# 一旦推送了新的 version.json / app-release.apk 而不清缓存，App 的「检查更新」
-# 会连续十几个小时读不到新版本，直到缓存自然过期。
+# jsDelivr 对 @main 这类分支引用默认缓存约 12 小时；purge 有配额，被限流时
+# 会被静默忽略。一旦推送了新的 version.json / app-release.apk 却没真正刷新，
+# App 的「检查更新」会连续十几个小时读不到新版本。
 #
-# 本工作流在 version.json 或 app-release.apk 发生变化时自动触发，
-# 反复 purge 并校验，直到 CDN 上的安装包大小与清单声明一致。
+# 本工作流在 version.json 或 app-release.apk 变化时触发，反复 purge 直到
+# 以「CDN 字节 == 仓库文件」确认成功为止（限流时按服务器给的 reset 等待）。
 #
-# 说明：plans.json 的缓存由 refresh-plans.yml 负责，不在此重复处理。
+# plans.json 的缓存由 refresh-plans.yml 负责，不在此重复处理。
 
 on:
   push:
@@ -28,71 +28,20 @@ permissions:
 jobs:
   purge:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 30
 
     steps:
-      - name: 取出清单与仓库标识
-        id: meta
-        run: |
-          set -euo pipefail
-          REPO="${{ github.repository }}"
-          echo "repo=${REPO}" >> "$GITHUB_OUTPUT"
-          echo "base=https://cdn.jsdelivr.net/gh/${REPO}@main" >> "$GITHUB_OUTPUT"
+      - name: 检出仓库
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          lfs: false
 
-      - name: 读取清单声明的安装包大小
-        id: manifest
-        run: |
-          set -euo pipefail
-          BASE="${{ steps.meta.outputs.base }}"
-          # raw 在推送后有几秒到几十秒的传播延迟，重试几次再放弃。
-          for i in 1 2 3 4 5; do
-            if curl -fsSL --max-time 60 \
-              "https://raw.githubusercontent.com/${{ github.repository }}/main/version.json" \
-              -o /tmp/version.json; then
-              break
-            fi
-            echo "raw 尚未就绪，${i}/5 次重试…"
-            sleep 8
-          done
-          test -s /tmp/version.json
-          SIZE=$(python3 -c "import json;print(json.load(open('/tmp/version.json'))['size'])")
-          VC=$(python3 -c "import json;print(json.load(open('/tmp/version.json'))['versionCode'])")
-          echo "size=${SIZE}" >> "$GITHUB_OUTPUT"
-          echo "vc=${VC}" >> "$GITHUB_OUTPUT"
-          echo "清单：versionCode=${VC}，安装包 ${SIZE} 字节"
+      - name: 准备 Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
 
-      - name: 刷新并校验 version.json
+      - name: 刷新并校验 version.json 与安装包
         run: |
-          set -euo pipefail
-          BASE="${{ steps.meta.outputs.base }}"
-          WANT="${{ steps.manifest.outputs.vc }}"
-          for i in 1 2 3 4; do
-            curl -s --max-time 30 "https://purge.jsdelivr.net/gh/${{ github.repository }}@main/version.json" >/dev/null || true
-            sleep 6
-            GOT=$(curl -fsSL --max-time 30 "$BASE/version.json" | python3 -c "import sys,json;print(json.load(sys.stdin)['versionCode'])" || echo 0)
-            echo "第 ${i} 次：CDN versionCode=${GOT}，期望 ${WANT}"
-            if [ "$GOT" = "$WANT" ]; then
-              echo "version.json 已刷新"
-              exit 0
-            fi
-          done
-          echo "::error::version.json 在 CDN 上仍是旧版本（期望 ${WANT}）"
-          exit 1
-
-      - name: 刷新并校验安装包
-        run: |
-          set -euo pipefail
-          BASE="${{ steps.meta.outputs.base }}"
-          WANT="${{ steps.manifest.outputs.size }}"
-          for i in 1 2 3 4; do
-            curl -s --max-time 30 "https://purge.jsdelivr.net/gh/${{ github.repository }}@main/app-release.apk" >/dev/null || true
-            sleep 6
-            GOT=$(curl -sI --max-time 30 "$BASE/app-release.apk" | grep -i '^content-length:' | tr -d '\r' | awk '{print $2}' || echo 0)
-            echo "第 ${i} 次：CDN Content-Length=${GOT}，期望 ${WANT}"
-            if [ "$GOT" = "$WANT" ]; then
-              echo "安装包已刷新"
-              exit 0
-            fi
-          done
-          echo "::error::安装包在 CDN 上仍是旧文件（期望 ${WANT} 字节）"
-          exit 1
+          python3 tools/purge_cdn.py version.json app-release.apk --max-wait 1500
