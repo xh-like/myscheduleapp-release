@@ -1,15 +1,15 @@
 {
-  "versionCode": 32,
-  "versionName": "2.9.21",
+  "versionCode": 33,
+  "versionName": "2.9.22",
   "apkUrl": "https://schedule-plans.app.workbuddy.host/app-release.apk?sharecode=NWSJZFXACD",
-  "size": 11306790,
-  "sha256": "21e7cf284d1b9ce5294785c07cdb76af89a3e2d813e1ab4bf5a9b238b9090aac",
+  "size": 11308390,
+  "sha256": "654656dedd9b350c6f25c6a99b9d91bb824f2012552c1dea0b007d7f058f4eec",
   "force": false,
-  "publishedAt": "2026-10-29 18:46",
+  "publishedAt": "2026-10-29 21:52",
   "notes": [
-    "小部件顶部月份标题真正居中（同步时间不再挤在右侧占位）",
-    "同步时间移到月份标题下方、居中小字显示",
-    "去掉标题下方那行重复的小字年月日，顶部更清爽",
-    "其余功能与数据逻辑不变"
+    "底部悬浮栏按设计稿重做：胶囊形（圆角 = 栏高一半）、半透明磨砂玻璃，背后内容只透出模糊色块",
+    "玻璃叠了两团柔光色斑 + 细颗粒噪点 + 顶部高光，深浅色模式各自适配",
+    "选中项改为主题蓝图标与文字，底下一枚淡白椭圆，切换时弹簧滑到新位置",
+    "标签图标放大到 24dp、栏高 64dp，点击不再出现任何方块水波纹"
   ]
 }
