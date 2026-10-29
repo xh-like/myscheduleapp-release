@@ -1,14 +1,15 @@
 {
-  "versionCode": 37,
-  "versionName": "2.9.26",
+  "versionCode": 38,
+  "versionName": "2.9.27",
   "apkUrl": "https://schedule-plans.app.workbuddy.host/app-release.apk?sharecode=NWSJZFXACD",
-  "size": 11303650,
-  "sha256": "43cecee0d649055da667af105892abdba01de9720360641f9965db21b10cc453",
+  "size": 11876351,
+  "sha256": "101902c802f0493bac1b85bc5783d53a944406b1da446c0837a6abd10b4c0d59",
   "force": false,
-  "publishedAt": "2026-10-29 22:28",
+  "publishedAt": "2026-10-29 22:36",
   "notes": [
-    "修复上一版启动闪退：撤回 Compose 1.7 与背景模糊实验，回到 2.9.24 已验证的稳定实现",
-    "悬浮栏恢复为半透明玻璃 + 蓝字选中（与 2.9.24 一致）",
-    "功能与数据无变化；如仍闪退请提供日志"
+    "重新尝试真背景模糊，改用更保守的写法：先记录两份图层再一次合成，模糊半径降到 24",
+    "新增崩溃守卫：如果某次启动在 8 秒内崩掉，下次启动会自动关闭模糊，App 照常可用",
+    "设置—外观 新增「悬浮栏磨砂玻璃」开关（Android 13 及以上才显示），可随时手动关掉",
+    "其余功能与 2.9.26 一致"
   ]
 }
