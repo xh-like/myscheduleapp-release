@@ -1,15 +1,14 @@
 {
-  "versionCode": 33,
-  "versionName": "2.9.22",
+  "versionCode": 34,
+  "versionName": "2.9.23",
   "apkUrl": "https://schedule-plans.app.workbuddy.host/app-release.apk?sharecode=NWSJZFXACD",
-  "size": 11308390,
-  "sha256": "654656dedd9b350c6f25c6a99b9d91bb824f2012552c1dea0b007d7f058f4eec",
+  "size": 11303826,
+  "sha256": "3cd3a3a0d6222044f6ed558139df364d66c18bb5c513599b3fe115e5df0c7fd5",
   "force": false,
-  "publishedAt": "2026-10-29 21:52",
+  "publishedAt": "2026-10-29 21:57",
   "notes": [
-    "底部悬浮栏按设计稿重做：胶囊形（圆角 = 栏高一半）、半透明磨砂玻璃，背后内容只透出模糊色块",
-    "玻璃叠了两团柔光色斑 + 细颗粒噪点 + 顶部高光，深浅色模式各自适配",
-    "选中项改为主题蓝图标与文字，底下一枚淡白椭圆，切换时弹簧滑到新位置",
-    "标签图标放大到 24dp、栏高 64dp，点击不再出现任何方块水波纹"
+    "底部悬浮栏不再显示选中椭圆，只保留蓝色的图标与文字",
+    "切换标签时不再有滑块底色，整条栏的点击扩张跳动保留",
+    "胶囊形磨砂玻璃外观不变"
   ]
 }
