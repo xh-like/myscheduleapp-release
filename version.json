@@ -1,15 +1,15 @@
 {
-  "versionCode": 38,
-  "versionName": "2.9.27",
+  "versionCode": 39,
+  "versionName": "2.9.28",
   "apkUrl": "https://schedule-plans.app.workbuddy.host/app-release.apk?sharecode=NWSJZFXACD",
   "size": 11876351,
-  "sha256": "101902c802f0493bac1b85bc5783d53a944406b1da446c0837a6abd10b4c0d59",
+  "sha256": "4949373876dbc0c3bec8a594bb13ff7302e0b8682edb42b4e4f6cf6100335c4c",
   "force": false,
-  "publishedAt": "2026-10-29 22:36",
+  "publishedAt": "2026-10-29 22:46",
   "notes": [
-    "重新尝试真背景模糊，改用更保守的写法：先记录两份图层再一次合成，模糊半径降到 24",
-    "新增崩溃守卫：如果某次启动在 8 秒内崩掉，下次启动会自动关闭模糊，App 照常可用",
-    "设置—外观 新增「悬浮栏磨砂玻璃」开关（Android 13 及以上才显示），可随时手动关掉",
-    "其余功能与 2.9.26 一致"
+    "背景模糊换成最稳的实现：内容与悬浮栏拆成两层，直接把内容截成缩略图做 CPU 模糊，完全不使用 RenderEffect",
+    "悬浮栏里显示的是栏正下方内容的模糊影像，滚动、翻页、切 tab 会跟着更新",
+    "崩溃守卫与设置里的「悬浮栏磨砂玻璃」开关保留，异常时自动退回半透明玻璃",
+    "内容与悬浮栏分层后，页面滑动、点击、键盘避让保持原样"
   ]
 }
