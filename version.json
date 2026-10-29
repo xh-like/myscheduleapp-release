@@ -1,15 +1,15 @@
 {
-  "versionCode": 28,
-  "versionName": "2.9.17",
+  "versionCode": 29,
+  "versionName": "2.9.18",
   "apkUrl": "https://schedule-plans.app.workbuddy.host/app-release.apk?sharecode=NWSJZFXACD",
-  "size": 11303658,
-  "sha256": "26ffa7d9880bde6c245151558144bedf121de637f518324f56c968a4617d1db7",
+  "size": 11306262,
+  "sha256": "76398780eab7fe5d828510a28ea1645016d93acff6323ad62625c29ef3d5bcff",
   "force": false,
-  "publishedAt": "2026-10-29 18:22",
+  "publishedAt": "2026-10-29 18:30",
   "notes": [
-    "底部悬浮栏改为玻璃质感：半透明底 + 顶部高光渐变 + 细描边 + 投影，深色模式自动适配",
-    "选中高亮改为椭圆形，切换标签时用弹簧动画滑到新位置",
-    "点击标签的瞬间整条栏轻轻下沉再弹回，手感更跟手",
-    "其余功能与数据逻辑不变"
+    "底部悬浮栏改为磨砂玻璃：半透明底 + 细颗粒噪点 + 顶部高光 + 细描边 + 投影",
+    "选中高亮椭圆加大：左右各宽 8dp、高 52dp，比内容区更饱满",
+    "点击标签时整条悬浮栏轻微扩张（横向 3% / 纵向 1.8%）再弹簧回位",
+    "深色模式自动适配透明度，其余功能不变"
   ]
 }
