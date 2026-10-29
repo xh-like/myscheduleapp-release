@@ -1,15 +1,14 @@
 {
-  "versionCode": 36,
-  "versionName": "2.9.25",
+  "versionCode": 37,
+  "versionName": "2.9.26",
   "apkUrl": "https://schedule-plans.app.workbuddy.host/app-release.apk?sharecode=NWSJZFXACD",
-  "size": 11872255,
-  "sha256": "1496496eb9b0f40eeacc2cb5e9a92ab92c3032dbe8731ec3d065e420b5a2629f",
+  "size": 11303650,
+  "sha256": "43cecee0d649055da667af105892abdba01de9720360641f9965db21b10cc453",
   "force": false,
-  "publishedAt": "2026-10-29 22:24",
+  "publishedAt": "2026-10-29 22:28",
   "notes": [
-    "悬浮栏改成真正的背景玻璃：把页面内容实时模糊后透过栏显示，能看到背后日历/列表的模糊轮廓",
-    "实现方式升级到 Compose 1.7 的离屏图层 + 高斯模糊（Android 12 及以上）",
-    "Android 12 以下设备自动退回原来的半透明玻璃，不会闪退",
-    "玻璃层更淡、颗粒更轻，选中仍是蓝色图标文字"
+    "修复上一版启动闪退：撤回 Compose 1.7 与背景模糊实验，回到 2.9.24 已验证的稳定实现",
+    "悬浮栏恢复为半透明玻璃 + 蓝字选中（与 2.9.24 一致）",
+    "功能与数据无变化；如仍闪退请提供日志"
   ]
 }
