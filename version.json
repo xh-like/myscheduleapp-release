@@ -1,15 +1,15 @@
 {
-  "versionCode": 25,
-  "versionName": "2.9.14",
+  "versionCode": 26,
+  "versionName": "2.9.15",
   "apkUrl": "https://schedule-plans.app.workbuddy.host/app-release.apk?sharecode=NWSJZFXACD",
-  "size": 11288005,
-  "sha256": "15e93be56aa2dd7af961611996329fb462e65d74af602b6c18a7d430bb6290dd",
+  "size": 11289501,
+  "sha256": "94d25a20d07dc340f7d784996b5eb57da3127ce8022f1e88ce9167af2ce82513",
   "force": false,
-  "publishedAt": "2026-10-29 13:10",
+  "publishedAt": "2026-10-29 15:12",
   "notes": [
-    "下载更新前先给 4 条通道并行测速（各 320 KB / 2 秒封顶），直接从最快的那条下载",
-    "下载途中若 8 秒后平均速度仍低于 40 KB/s，自动换到下一条通道，不再卡在慢链路上",
-    "云端清单的下载地址已改指 WorkBuddy 站点（实测 8.5 MB/s，GitHub Pages 仅 22 KB/s）",
-    "2.9.12 / 2.9.13 无需升级也已走新地址，更新包 1~2 秒下完"
+    "本地添加的任务改为按账号分开保存，切换账号不再清空，切回来数据原样都在",
+    "升级后第一次打开会把现有任务自动归到当前账号，只搬一次，不会串号",
+    "切换账号时只清空排班缓存，任务跟着账号走",
+    "其余功能无变化"
   ]
 }
