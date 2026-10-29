@@ -57,10 +57,19 @@
 
 <script>
 (function () {
-  var q = new URLSearchParams(location.search);
-  var code = q.get('code') || '';
-  var state = q.get('state') || '';
-  var err = q.get('error') || q.get('errcode') || '';
+  // 授权页把 code 拼回 redirect_uri 时，可能用 ? 或 & 连接，
+  // 而本页地址本身已带 sharecode 参数，所以先按标准解析，再退回正则兜底。
+  function pick(key) {
+    try {
+      var v = new URLSearchParams(location.search).get(key);
+      if (v) return v;
+    } catch (e) {}
+    var m = location.href.match(new RegExp('[?&]' + key + '=([^&#]+)'));
+    return m ? decodeURIComponent(m[1]) : '';
+  }
+
+  var code = pick('code');
+  var err = pick('error') || pick('errcode');
 
   var box = document.getElementById('code');
   var okTip = document.getElementById('ok');
