@@ -1,0 +1,6 @@
+# OAuth 令牌落盘文件（含明文 access_token / refresh_token，绝不能提交）
+tdoc_token.json
+tdoc_token.json.tmp
+
+# 取数过程中的临时目录
+.plansrc/
