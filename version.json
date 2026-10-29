@@ -1,14 +1,16 @@
 {
-  "versionCode": 19,
-  "versionName": "2.9.8",
+  "versionCode": 20,
+  "versionName": "2.9.9",
   "apkUrl": "https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main/app-release.apk",
-  "size": 11271021,
-  "sha256": "f23f1215035d6176efd119f1c7d114ea42b9d07ac873a02823ad018431d191a3",
+  "size": 11272689,
+  "sha256": "fee19aff96df87ed65b6bd745afaf2b0b71e6c1c7ed0ffc8bdaebb241c84b7f9",
   "force": false,
-  "publishedAt": "2026-10-28 23:00",
+  "publishedAt": "2026-10-29 09:25",
   "notes": [
-    "计划页：每条计划的地点（站点）单独占一行，不再与时间/类别/备注挤在一起",
-    "地点过长时可占两行，不会被其他标签挤压变形",
-    "其余内容与逻辑无变化"
+    "计划自动比对固定为每天 12:00、17:00，设置页不再提供修改入口",
+    "关闭 App 也能准时比对：改由系统精确闹钟唤醒，重启手机或应用更新后会自动重排",
+    "只有云端与本地存在差异时才写入，无变化不覆盖本地数据",
+    "日志按日期列出改动明细：新增 / 删除 / 修改（字段 旧值→新值）",
+    "修复表格中间插行、删行导致整批计划被误报为「修改」的问题"
   ]
 }
