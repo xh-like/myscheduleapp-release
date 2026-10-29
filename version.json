@@ -1,15 +1,15 @@
 {
-  "versionCode": 29,
-  "versionName": "2.9.18",
+  "versionCode": 30,
+  "versionName": "2.9.19",
   "apkUrl": "https://schedule-plans.app.workbuddy.host/app-release.apk?sharecode=NWSJZFXACD",
-  "size": 11306262,
-  "sha256": "76398780eab7fe5d828510a28ea1645016d93acff6323ad62625c29ef3d5bcff",
+  "size": 11308034,
+  "sha256": "1e9950085ff06e202d4f71b1c1b0589f8027e4fd72fdeae45f49f0aecc3fa4b1",
   "force": false,
-  "publishedAt": "2026-10-29 18:30",
+  "publishedAt": "2026-10-29 18:34",
   "notes": [
-    "底部悬浮栏改为磨砂玻璃：半透明底 + 细颗粒噪点 + 顶部高光 + 细描边 + 投影",
-    "选中高亮椭圆加大：左右各宽 8dp、高 52dp，比内容区更饱满",
-    "点击标签时整条悬浮栏轻微扩张（横向 3% / 纵向 1.8%）再弹簧回位",
-    "深色模式自动适配透明度，其余功能不变"
+    "小部件顶部新增一行年月日 + 星期（如「2026年10月29日 周四」）",
+    "日历左右两侧新增 ‹ › 按钮，可直接切换上下月，每个小部件单独记住所选月份",
+    "切到没有排班数据的月份会显示「无排班」并整月留白，不再误标成休息",
+    "小部件每小时刷新、重启手机后仍停留在你选的那个月"
   ]
 }
