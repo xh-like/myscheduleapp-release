@@ -13,6 +13,10 @@ on:
     # UTC 01/04/07/10/13/16/19/22 点 = 北京时间 09/12/15/18/21/00/03/06 点
     - cron: '0 1,4,7,10,13,16,19,22 * * *'
   workflow_dispatch:
+  # 手动触发通道：改一下 .refresh-now 的内容再 push 即可跑一次（无需令牌）
+  push:
+    paths:
+      - '.refresh-now'
 
 concurrency:
   group: refresh-plans
