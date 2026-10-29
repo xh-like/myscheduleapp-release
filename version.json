@@ -1,15 +1,15 @@
 {
-  "versionCode": 24,
-  "versionName": "2.9.13",
+  "versionCode": 25,
+  "versionName": "2.9.14",
   "apkUrl": "https://schedule-plans.app.workbuddy.host/app-release.apk?sharecode=NWSJZFXACD",
-  "size": 11283057,
-  "sha256": "c291694e78f7a1cc028ae1f1549b2320a1daf36a51fd1aa43e3d2dca28666c1f",
+  "size": 11288005,
+  "sha256": "15e93be56aa2dd7af961611996329fb462e65d74af602b6c18a7d430bb6290dd",
   "force": false,
-  "publishedAt": "2026-10-29 12:56",
+  "publishedAt": "2026-10-29 13:10",
   "notes": [
-    "设置页「检查更新 / 立即更新」统一为同一款框框按钮，等宽等高，不再一高一低",
-    "更新弹窗里的「立即更新 / 稍后 / 立即安装」同步改成同样尺寸的按钮",
-    "长文案自动省略，不会再折行把按钮撑高",
-    "下载、安装、检查更新的逻辑没有变化"
+    "下载更新前先给 4 条通道并行测速（各 320 KB / 2 秒封顶），直接从最快的那条下载",
+    "下载途中若 8 秒后平均速度仍低于 40 KB/s，自动换到下一条通道，不再卡在慢链路上",
+    "云端清单的下载地址已改指 WorkBuddy 站点（实测 8.5 MB/s，GitHub Pages 仅 22 KB/s）",
+    "2.9.12 / 2.9.13 无需升级也已走新地址，更新包 1~2 秒下完"
   ]
 }
