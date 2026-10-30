@@ -1,15 +1,14 @@
 {
-  "versionCode": 61,
-  "versionName": "3.0.0",
+  "versionCode": 62,
+  "versionName": "3.0.1",
   "apkUrl": "https://schedule-plans.app.workbuddy.host/app-release.apk?sharecode=NWSJZFXACD",
   "size": 11899616,
-  "sha256": "4c7ffeee03982ae3b54a8693c1c62c567d521d28cbabf95c66834d4f984b52f9",
+  "sha256": "26a3fcf1be5b5f1dec0ccf581e589e9d722843367c671514eb80dc98a1ed4475",
   "force": false,
-  "publishedAt": "2026-10-30 00:55",
+  "publishedAt": "2026-10-30 12:22",
   "notes": [
-    "悬浮栏升级为 iOS 式「透过玻璃看」：接入 Haze 库，对背后内容做真正的背景模糊（不再依赖截图）",
-    "玻璃用 20dp 模糊 + 半透明玻璃色，背后内容被柔化后透出，配合顶部高光与厚玻璃描边，接近 iOS 底部栏",
-    "保留崩溃守卫：若个别机型对 RenderEffect 敏感，自动退回纯色玻璃，设置页可手动重开「悬浮栏磨砂玻璃」",
-    "内容与悬浮栏合并回同一渲染层，整体更稳定、更省资源"
+    "界面适配不同手机：各页面底部留白改为动态跟随系统导航栏高度，悬浮栏滑到最底部不再遮挡内容",
+    "日志页删除顶部「谁修改了我的排班」独立卡片，排班变更通知并入下方操作日志统一展示",
+    "平台通知服务里「发布新消息」类通知同步进操作日志，展示完整标题与详细内容"
   ]
 }
