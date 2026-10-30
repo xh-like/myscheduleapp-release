@@ -1,14 +1,14 @@
 {
-  "versionCode": 67,
-  "versionName": "3.0.6",
+  "versionCode": 71,
+  "versionName": "3.1.0",
   "apkUrl": "https://schedule-plans.app.workbuddy.host/app-release.apk?sharecode=NWSJZFXACD",
   "size": 11911908,
-  "sha256": "2404298efe28423241dd0da1aba42f6c0f44b888c679879239af2f0d0f89c6f2",
+  "sha256": "36dc12797517e78775cb396c50440a548ad6f95c35d04e9779ded97eab08ca6b",
   "force": false,
-  "publishedAt": "2026-10-30 19:41",
+  "publishedAt": "2026-10-30 21:43",
   "notes": [
-    "计划页底部新增「我的夜班」预告：把排班里的 YJ1/YJ3 按日期列出，横向滑动查看，今天的日期高亮",
-    "每个日期显示班次代码（带颜色）和上班时间段，提前知道自己哪天干什么",
-    "最多展示未来 14 个 YJ1/YJ3 班次，排班同步后自动更新"
+    "近期安排只显示有 YJ1/YJ3 夜班的日期，其余日期不再出现；当天的作业计划仍附在对应日期下",
+    "点击计划页后默认回到列表最上方，不再停留在中间位置",
+    "取消日志中的「应用启动」通知，日志更清爽"
   ]
 }
