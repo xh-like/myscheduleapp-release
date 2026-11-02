@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>排班 App · 下载</title>
+<style>
+  :root {
+    --bg: #f5f6fa;
+    --card: #ffffff;
+    --text: #1b1f2a;
+    --sub: #6b7280;
+    --line: #e8eaf0;
+    --accent: #2f6bff;
+    --fast: #12a150;
+    --warn: #c2410c;
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  body {
+    margin: 0; padding: 28px 16px 60px;
+    background: var(--bg); color: var(--text);
+    font: 15px/1.6 -apple-system, "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  }
+  .wrap { max-width: 620px; margin: 0 auto; }
+  h1 { font-size: 22px; margin: 0 0 6px; letter-spacing: .5px; }
+  .meta { color: var(--sub); font-size: 13px; margin-bottom: 22px; }
+  .card {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 16px; padding: 18px; margin-bottom: 14px;
+    box-shadow: 0 6px 18px rgba(24,39,75,.05);
+  }
+  .card h2 { font-size: 14px; margin: 0 0 14px; color: var(--sub); font-weight: 500; letter-spacing: .5px; }
+  a.dl {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 12px; text-decoration: none; color: inherit;
+    border: 1px solid var(--line); border-radius: 12px;
+    padding: 14px 16px; margin-bottom: 10px; background: #fbfcfe;
+    transition: border-color .15s, transform .15s, background .15s;
+  }
+  a.dl:hover { border-color: #c9d4ea; background: #f7f9ff; transform: translateY(-1px); }
+  a.dl.primary { border-color: #bcd0ff; background: #f2f6ff; }
+  .name { font-weight: 600; font-size: 15px; }
+  .desc { color: var(--sub); font-size: 12.5px; margin-top: 3px; }
+  .tag {
+    font-size: 12px; padding: 3px 9px; border-radius: 999px;
+    background: #eef2f9; color: var(--sub); white-space: nowrap;
+  }
+  .tag.good { background: #e6f6ec; color: var(--fast); }
+  .tag.slow { background: #fdeee5; color: var(--warn); }
+  .note { color: var(--sub); font-size: 13px; line-height: 1.75; }
+  .note b { color: var(--text); }
+  code {
+    background: #eef1f7; border-radius: 6px; padding: 1px 6px;
+    font-size: 12.5px; word-break: break-all;
+  }
+  .foot { text-align: center; color: #9aa3b2; font-size: 12px; margin-top: 26px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>排班 App</h1>
+  <div class="meta" id="meta">正在读取版本信息…</div>
+
+  <div class="card">
+    <h2>选择下载线路</h2>
+
+    <a class="dl primary" id="l1" href="#">
+      <div>
+        <div class="name">加速线路 ①（推荐）</div>
+        <div class="desc">国内中转，实测约 0.9 MB/s，11 MB 约 12 秒</div>
+      </div>
+      <span class="tag good">最快</span>
+    </a>
+
+    <a class="dl" id="l2" href="#">
+      <div>
+        <div class="name">加速线路 ②</div>
+        <div class="desc">jsDelivr CDN，实测约 150 KB/s，约 1 分半</div>
+      </div>
+      <span class="tag">较稳</span>
+    </a>
+
+    <a class="dl" id="l3" href="#">
+      <div>
+        <div class="name">加速线路 ③</div>
+        <div class="desc">gh-proxy 中转，线路①不通时可试</div>
+      </div>
+      <span class="tag">备用</span>
+    </a>
+
+    <a class="dl" id="l4" href="#">
+      <div>
+        <div class="name">GitHub 官方地址</div>
+        <div class="desc">不经过任何中转，海外网络用这条更合适</div>
+      </div>
+      <span class="tag slow">国内较慢</span>
+    </a>
+  </div>
+
+  <div class="card">
+    <h2>安装提示</h2>
+    <div class="note">
+      · 下载得到的文件是 <b>app-release.apk</b>，点击即可安装，需要允许「安装未知来源应用」。<br>
+      · 从 <b>3.1 或更早</b> 升级的用户：新版签名与旧版不同，<b>必须先卸载旧版再安装</b>，否则会提示「应用未安装」。卸载后数据仍在云端，登录即可同步。<br>
+      · 已装 3.2.x 的用户可以直接覆盖安装，不需要卸载。
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>文件校验</h2>
+    <div class="note" id="sum">读取中…</div>
+  </div>
+
+  <div class="foot">排班 App · 个人使用</div>
+</div>
+
+<script>
+  const RAW = "https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main";
+  const JSD = "https://cdn.jsdelivr.net/gh/xh-like/myscheduleapp-release@main";
+  const PAGES = "https://xh-like.github.io/myscheduleapp-release";
+
+  document.getElementById("l1").href = "https://ghfast.top/" + RAW + "/app-release.apk";
+  document.getElementById("l2").href = JSD + "/app-release.apk";
+  document.getElementById("l3").href = "https://gh-proxy.com/" + RAW + "/app-release.apk";
+  document.getElementById("l4").href = PAGES + "/app-release.apk";
+
+  fetch(PAGES + "/version.json?t=" + Date.now())
+    .then(r => r.json())
+    .then(v => {
+      document.getElementById("meta").textContent =
+        "版本 " + v.versionName + " · " + (v.size / 1048576).toFixed(1) + " MB · 发布于 " + v.publishedAt;
+      document.getElementById("sum").innerHTML =
+        "SHA-256：<br><code>" + v.sha256 + "</code><br><br>下载完成后如需核对，可用任意哈希工具比对，不一致说明文件损坏，请换线路重下。";
+    })
+    .catch(() => {
+      document.getElementById("meta").textContent = "版本信息读取失败，可直接点上面的线路下载";
+      document.getElementById("sum").textContent = "暂时无法读取校验值。";
+    });
+</script>
+</body>
+</html>
