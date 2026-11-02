@@ -1,6 +1,6 @@
 {
-  "versionCode": 75,
-  "versionName": "3.2.3",
+  "versionCode": 76,
+  "versionName": "3.2.4",
   "apkUrl": "https://ghfast.top/https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main/app-release.apk",
   "mirrors": [
     "https://ghfast.top/https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main/app-release.apk",
@@ -9,14 +9,16 @@
     "https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main/app-release.apk",
     "https://xh-like.github.io/myscheduleapp-release/app-release.apk"
   ],
-  "size": 11019423,
-  "sha256": "741a03b9fae9d2e1cddd4750f6b471fea4a76c3c01ada93cfe85a6d2f492f3f9",
+  "size": 11027311,
+  "sha256": "03ceec2d48e6ab86f85f21ffe5d2766d670558b08457e8eb507bf1cca785759c",
   "force": false,
-  "publishedAt": "2026-11-02 22:22",
+  "publishedAt": "2026-11-02 22:45",
   "notes": [
-    "悬浮栏整体抬高，不再贴着屏幕底部",
-    "日历页的淡蓝紫底色同步到待办、计划、设置、日志，切换页面底色保持一致",
-    "使用情况统计改为仅指定账号可见",
-    "安装包继续走加速线路下载"
+    "修复桌面小部件：之前在桌面上一直显示「无法加载小部件」，现在能正常显示月历",
+    "小部件加了一行「今天 · 班次 时间」，同步完成后立即刷新，不用等系统每小时刷新",
+    "小部件左右箭头可以翻月，点标题回到本月，点空白处直接打开 App",
+    "检查更新改成独立弹窗：版本对比、更新说明、软件内下载进度都在里面，下完点一下即可安装",
+    "设置里写明排班和计划的自动刷新频率",
+    "底部悬浮栏位置微调"
   ]
 }
