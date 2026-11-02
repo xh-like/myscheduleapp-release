@@ -154,10 +154,16 @@ def main():
     by_title = {p.get("title"): p for p in props}
     log("子表共 %d 个" % len(props))
 
+    missing = []
+    got = 0
     for name in want:
         p = by_title.get(name)
         if not p:
-            die("找不到子表「%s」，现有：%s" % (name, list(by_title)))
+            # 下月表常在下月中旬才建；缺表不应让整轮失败，否则当月数据也跟着停更。
+            missing.append(name)
+            log("::warning::子表「%s」尚未创建，本轮跳过（现有：%s）"
+                % (name, " / ".join(by_title)))
+            continue
         sid = p["sheetId"]
         rows_n = int(p.get("rowTotal") or 225)
         rng = "A1:%s%d" % (COL_LETTER, rows_n)
@@ -176,6 +182,9 @@ def main():
                 vals += [""] * (NCOL - len(vals))
                 w.writerow(vals[:NCOL])
         log("OK %s(%s) %d 行 -> %s" % (name, sid, len(rows), path))
+        got += 1
+    if not got:
+        die("所有目标子表都不存在：%s" % " / ".join(want))
     return 0
 
 
