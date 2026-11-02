@@ -1,7 +1,7 @@
 {
   "versionCode": 72,
   "versionName": "3.2.0",
-  "apkUrl": "https://cdn.jsdelivr.net/gh/xh-like/myscheduleapp-release@main/app-release.apk",
+  "apkUrl": "https://xh-like.github.io/myscheduleapp-release/app-release.apk",
   "size": 11011255,
   "sha256": "a61716ca0783d81645e1b2c564f6b29b9c28308d99752f99435b1398fafcc74a",
   "force": false,
