@@ -21,6 +21,7 @@ import argparse
 import base64
 import csv
 import datetime
+import re
 import json
 import os
 import shutil
@@ -125,6 +126,23 @@ def target_labels(today=None):
     return [sheet_label(datetime.date(y, m, 1)), sheet_label(datetime.date(nxt_y, nxt_m, 1))]
 
 
+def all_month_labels(by_title, today=None):
+    """文档里有几个月就同步几个月：抓「YY年M月」这类子表的全部（含前几个月），
+    只排除比下个月还远的未来表。"""
+    today = today or datetime.date.today()
+    nxt = (today.year + 1, 1) if today.month == 12 else (today.year, today.month + 1)
+    found = []
+    for t in by_title:
+        m = re.match(r"^(\d{2})年(\d{1,2})月$", t or "")
+        if not m:
+            continue
+        y, mo = 2000 + int(m.group(1)), int(m.group(2))
+        if 1 <= mo <= 12 and (y, mo) <= nxt:
+            found.append((y, mo, t))
+    found.sort()
+    return [t for _, _, t in found]
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--out-dir", default=".plansrc")
@@ -132,10 +150,10 @@ def main():
     args = ap.parse_args()
 
     os.makedirs(args.out_dir, exist_ok=True)
-    want = target_labels()
-    log("目标子表：%s" % " / ".join(want))
 
     if args.csv_dir:
+        want = target_labels()
+        log("目标子表：%s" % " / ".join(want))
         for name in want:
             src = os.path.join(args.csv_dir, name + ".csv")
             if not os.path.exists(src):
@@ -153,6 +171,12 @@ def main():
         die("未取到子表列表: %s" % json.dumps(meta, ensure_ascii=False)[:300])
     by_title = {p.get("title"): p for p in props}
     log("子表共 %d 个" % len(props))
+
+    # 有几个月同步几个月：所有月度子表（含已过去的月份）都要，不只是当月和次月
+    want = all_month_labels(by_title)
+    if not want:
+        want = target_labels()
+    log("目标子表：%s" % " / ".join(want))
 
     missing = []
     got = 0
