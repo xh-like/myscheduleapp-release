@@ -1,6 +1,6 @@
 {
-  "versionCode": 74,
-  "versionName": "3.2.2",
+  "versionCode": 75,
+  "versionName": "3.2.3",
   "apkUrl": "https://ghfast.top/https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main/app-release.apk",
   "mirrors": [
     "https://ghfast.top/https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main/app-release.apk",
@@ -9,14 +9,14 @@
     "https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main/app-release.apk",
     "https://xh-like.github.io/myscheduleapp-release/app-release.apk"
   ],
-  "size": 11018847,
-  "sha256": "a09a4ad87274052c40128d164151a600d02dfa9c32805c57c0fba4ce540edbb0",
+  "size": 11019423,
+  "sha256": "741a03b9fae9d2e1cddd4750f6b471fea4a76c3c01ada93cfe85a6d2f492f3f9",
   "force": false,
-  "publishedAt": "2026-11-02 22:10",
+  "publishedAt": "2026-11-02 22:22",
   "notes": [
-    "安装包下载改走加速线路，国内下载 10 秒左右完成",
-    "下载变慢时会自动切换备用线路",
-    "修复 3.1 旧版安装包被误当作新版下载的问题",
-    "UI 沿用 3.2.1：计划页可看前几个月、使用情况统计等"
+    "悬浮栏整体抬高，不再贴着屏幕底部",
+    "日历页的淡蓝紫底色同步到待办、计划、设置、日志，切换页面底色保持一致",
+    "使用情况统计改为仅指定账号可见",
+    "安装包继续走加速线路下载"
   ]
 }
