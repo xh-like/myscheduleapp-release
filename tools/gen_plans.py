@@ -5,7 +5,8 @@
     python gen_plans.py <csv目录> <输出json路径> [今天yyyy-MM-dd]
 
 规则:
-  - 表内没有“完成状态”列，未完成 = 日期 >= 今天。
+  - 每个月度子表全部导出（含已过去的月份），文档里有几个月就同步几个月。
+  - 表内没有“完成状态”列，App 也不展示完成状态，因此不再按今天过滤。
   - 子表名形如 26年10月，若单元格年份与子表年份不符（常见 2025 笔误），以子表年份为准。
 """
 import csv, json, os, re, sys, datetime
@@ -61,11 +62,13 @@ def main():
             content = r[5].strip()
             if not content:
                 continue
-            if d < today:                       # 已过期 = 已完成
-                continue
+            no = r[0].strip()
+            time_s = r[4].strip().replace("：", ":")
+            # 稳定 id：日期 + 行号（无行号用时间），刷新后同一行不会换身份
+            pid = "p-%s-%s" % (d.strftime("%Y%m%d"), no if no else time_s.replace(":", ""))
             plans.append({
-                "id": "%s-%s" % (fn.replace("年", "").replace("月", "").replace(".csv", ""), len(plans) + 1),
-                "no": r[0].strip(),
+                "id": pid,
+                "no": no,
                 "date": d.isoformat(),
                 "week": WEEK[d.weekday()],
                 "time": r[4].strip().replace("：", ":"),
@@ -83,7 +86,7 @@ def main():
     payload = {
         "updatedAt": datetime.datetime.now().strftime("%Y-%m-%d %H:%M"),
         "source": "腾讯文档·运维作业计划申请",
-        "rule": "未完成 = 计划日期 ≥ 今天",
+        "rule": "导出全部月度子表（含历史月份）",
         "today": today.isoformat(),
         "count": len(plans),
         "plans": plans,
