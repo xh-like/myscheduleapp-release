@@ -1,6 +1,6 @@
 {
-  "versionCode": 76,
-  "versionName": "3.2.4",
+  "versionCode": 77,
+  "versionName": "3.2.5",
   "apkUrl": "https://ghfast.top/https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main/app-release.apk",
   "mirrors": [
     "https://ghfast.top/https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main/app-release.apk",
@@ -9,16 +9,14 @@
     "https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main/app-release.apk",
     "https://xh-like.github.io/myscheduleapp-release/app-release.apk"
   ],
-  "size": 11027311,
-  "sha256": "03ceec2d48e6ab86f85f21ffe5d2766d670558b08457e8eb507bf1cca785759c",
+  "size": 11028591,
+  "sha256": "529a9ac83df6a4640c47157447434ae8f52c3b18dbe3265cd7155f0f122c0f51",
   "force": false,
-  "publishedAt": "2026-11-02 22:45",
+  "publishedAt": "2026-11-02 23:10",
   "notes": [
-    "修复桌面小部件：之前在桌面上一直显示「无法加载小部件」，现在能正常显示月历",
-    "小部件加了一行「今天 · 班次 时间」，同步完成后立即刷新，不用等系统每小时刷新",
-    "小部件左右箭头可以翻月，点标题回到本月，点空白处直接打开 App",
-    "检查更新改成独立弹窗：版本对比、更新说明、软件内下载进度都在里面，下完点一下即可安装",
-    "设置里写明排班和计划的自动刷新频率",
-    "底部悬浮栏位置微调"
+    "修复换账号后工时串号：工时记录、待办、班次改为按账号分开保存，登录别人的账号不会再看到上一个人的工时，两个人的工时会叠在一起算的问题也解决了",
+    "换回原来的账号，之前记的工时还在",
+    "桌面小部件：本月里补位的上月、下月日期改为灰色显示，不再和本月日期一样亮，翻到那个月后自动恢复正常颜色",
+    "老规则不变：3.1 及更早版本需要先卸载再安装，3.2.x 可以直接覆盖更新"
   ]
 }
