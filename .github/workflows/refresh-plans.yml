@@ -7,6 +7,9 @@ name: 云端刷新排班计划数据
 #   TDOC_ACCESS_TOKEN   腾讯文档开放平台 access_token（Client-Id / Open-Id 自动从其 JWT 解析）
 # 未配置时本任务以「跳过」结束，不会报错、不会改动 plans.json。
 # 注意：access_token 有效期 30 天，到期前需要换新（脚本会在剩余不足 7 天时给出告警）。
+#
+# 失败告警：任一步骤失败会自动开/追加一个 Issue（标题含「排班数据刷新失败」），
+# 恢复后自动关闭。Issue 会触发 GitHub 通知，手机上就能收到，不用盯 Actions 页面。
 
 on:
   schedule:
@@ -24,6 +27,7 @@ concurrency:
 
 permissions:
   contents: write
+  issues: write
 
 jobs:
   refresh:
@@ -94,3 +98,45 @@ jobs:
           # 此时单次 purge 会被静默忽略、缓存继续保留 12 小时。脚本会按 reset 等待重试，
           # 并以「CDN 字节 == 本地文件」为准判定成功。
           python3 tools/purge_cdn.py plans.json --max-wait 1800
+
+      # ---- 以下两步只负责「出问题时让人知道」，不影响数据管道 ----
+
+      - name: 失败时开告警 Issue
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const owner = context.repo.owner, repo = context.repo.repo;
+            const title = '⚠️ 排班数据刷新失败';
+            const runUrl = `${context.serverUrl}/${owner}/${repo}/actions/runs/${context.runId}`;
+            const when = new Date().toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai' });
+            const body = [
+              `**时间**：${when}`,
+              `**运行记录**：${runUrl}`,
+              '',
+              '本轮刷新未通过，手机端会继续读到上一次成功时的旧数据。',
+              '',
+              '常见原因：',
+              '- 腾讯文档当月 / 下月子表不存在或改了名',
+              '- `TDOC_ACCESS_TOKEN` 过期（有效期 30 天）',
+              '- 腾讯文档接口临时故障',
+            ].join('\n');
+            const { data: issues } = await github.rest.issues.listForRepo({ owner, repo, state: 'open', per_page: 100 });
+            const hit = issues.find(i => i.title.includes('排班数据刷新失败'));
+            if (hit) {
+              await github.rest.issues.createComment({ owner, repo, issue_number: hit.number, body });
+            } else {
+              await github.rest.issues.create({ owner, repo, title, body });
+            }
+
+      - name: 恢复后自动关闭告警 Issue
+        if: success()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const owner = context.repo.owner, repo = context.repo.repo;
+            const { data: issues } = await github.rest.issues.listForRepo({ owner, repo, state: 'open', per_page: 100 });
+            for (const i of issues.filter(x => x.title.includes('排班数据刷新失败'))) {
+              await github.rest.issues.createComment({ owner, repo, issue_number: i.number, body: '本轮刷新已恢复正常，自动关闭。' });
+              await github.rest.issues.update({ owner, repo, issue_number: i.number, state: 'closed' });
+            }
