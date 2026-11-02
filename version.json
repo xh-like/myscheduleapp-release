@@ -1,14 +1,15 @@
 {
-  "versionCode": 72,
-  "versionName": "3.2.0",
+  "versionCode": 73,
+  "versionName": "3.2.1",
   "apkUrl": "https://xh-like.github.io/myscheduleapp-release/app-release.apk",
-  "size": 11011255,
-  "sha256": "a61716ca0783d81645e1b2c564f6b29b9c28308d99752f99435b1398fafcc74a",
+  "size": 11017567,
+  "sha256": "6abfd9f7002fd9d1abbb7671d84089e93f1dd6aa1b2d891d9887fa23f6903fe5",
   "force": false,
-  "publishedAt": "2026-11-02 21:30",
+  "publishedAt": "2026-11-02 21:56",
   "notes": [
     "UI 更新",
     "修复上 12 个小时的班只记录 12 个小时的 bug",
-    "计划页面支持查看前几个月"
+    "计划页面支持查看前几个月",
+    "设置里新增「使用情况」：在线 / 今日 / 累计使用人数"
   ]
 }
