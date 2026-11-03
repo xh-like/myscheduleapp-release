@@ -1,6 +1,6 @@
 {
-  "versionCode": 79,
-  "versionName": "3.2.7",
+  "versionCode": 81,
+  "versionName": "3.2.9",
   "apkUrl": "https://ghfast.top/https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main/app-release.apk",
   "mirrors": [
     "https://ghfast.top/https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main/app-release.apk",
@@ -9,13 +9,13 @@
     "https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main/app-release.apk",
     "https://xh-like.github.io/myscheduleapp-release/app-release.apk"
   ],
-  "size": 11031867,
-  "sha256": "90bfa05ae7955c0fbe62e005e6643d74e47ff5325f16721bce6b21b1017ba8d5",
+  "size": 11032171,
+  "sha256": "04f253a238817e7ed9c790530c02e07bc8ec308b68100113318253426b790463",
   "force": false,
-  "publishedAt": "2026-11-03 18:55",
+  "publishedAt": "2026-11-03 21:30",
   "notes": [
-    "打卡提醒增强：通知现在显式带上系统铃声和震动，提醒时会响铃 + 弹出横幅通知，不再静音",
-    "设置页「作业计划」改为显示计划默认每天 12:00、17:00 定点自动同步，排班保持原有方式（不在此体现）",
+    "移除邮箱功能：待办页的「邮箱」卡片、账号配置弹窗、IMAP 拉取（含内置邮箱账号与授权码）全部删除",
+    "安装包不再包含 JavaMail 依赖，体积略有变化，其余功能不变",
     "老规则不变：3.1 及更早版本需要先卸载再安装，3.2.x 可以直接覆盖更新"
   ]
 }
