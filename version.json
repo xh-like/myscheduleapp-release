@@ -1,6 +1,6 @@
 {
-  "versionCode": 78,
-  "versionName": "3.2.6",
+  "versionCode": 79,
+  "versionName": "3.2.7",
   "apkUrl": "https://ghfast.top/https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main/app-release.apk",
   "mirrors": [
     "https://ghfast.top/https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main/app-release.apk",
@@ -9,14 +9,13 @@
     "https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main/app-release.apk",
     "https://xh-like.github.io/myscheduleapp-release/app-release.apk"
   ],
-  "size": 11031071,
-  "sha256": "c0e132a0a3e7f9ebb31d24d6d83d77cba133fc865ba0d62126351e4b9c72daf4",
+  "size": 11031867,
+  "sha256": "90bfa05ae7955c0fbe62e005e6643d74e47ff5325f16721bce6b21b1017ba8d5",
   "force": false,
-  "publishedAt": "2026-11-03 18:40",
+  "publishedAt": "2026-11-03 18:55",
   "notes": [
-    "计划支持每天 12 点、17 点定点自动刷新（用精确闹钟触发，不依赖省电策略飘忽的后台任务）",
-    "每次自动刷新都会在软件日志里留一条带时间的记录，例如「计划自动刷新 · 12:00 · 有变化」",
-    "后台自动同步的日志现在会写清楚同步了「计划」还是「排班」，并带上时间",
+    "打卡提醒增强：通知现在显式带上系统铃声和震动，提醒时会响铃 + 弹出横幅通知，不再静音",
+    "设置页「作业计划」改为显示计划默认每天 12:00、17:00 定点自动同步，排班保持原有方式（不在此体现）",
     "老规则不变：3.1 及更早版本需要先卸载再安装，3.2.x 可以直接覆盖更新"
   ]
 }
