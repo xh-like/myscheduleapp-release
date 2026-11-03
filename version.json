@@ -1,6 +1,6 @@
 {
-  "versionCode": 77,
-  "versionName": "3.2.5",
+  "versionCode": 78,
+  "versionName": "3.2.6",
   "apkUrl": "https://ghfast.top/https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main/app-release.apk",
   "mirrors": [
     "https://ghfast.top/https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main/app-release.apk",
@@ -9,14 +9,14 @@
     "https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main/app-release.apk",
     "https://xh-like.github.io/myscheduleapp-release/app-release.apk"
   ],
-  "size": 11028591,
-  "sha256": "529a9ac83df6a4640c47157447434ae8f52c3b18dbe3265cd7155f0f122c0f51",
+  "size": 11031071,
+  "sha256": "c0e132a0a3e7f9ebb31d24d6d83d77cba133fc865ba0d62126351e4b9c72daf4",
   "force": false,
-  "publishedAt": "2026-11-02 23:10",
+  "publishedAt": "2026-11-03 18:40",
   "notes": [
-    "修复换账号后工时串号：工时记录、待办、班次改为按账号分开保存，登录别人的账号不会再看到上一个人的工时，两个人的工时会叠在一起算的问题也解决了",
-    "换回原来的账号，之前记的工时还在",
-    "桌面小部件：本月里补位的上月、下月日期改为灰色显示，不再和本月日期一样亮，翻到那个月后自动恢复正常颜色",
+    "计划支持每天 12 点、17 点定点自动刷新（用精确闹钟触发，不依赖省电策略飘忽的后台任务）",
+    "每次自动刷新都会在软件日志里留一条带时间的记录，例如「计划自动刷新 · 12:00 · 有变化」",
+    "后台自动同步的日志现在会写清楚同步了「计划」还是「排班」，并带上时间",
     "老规则不变：3.1 及更早版本需要先卸载再安装，3.2.x 可以直接覆盖更新"
   ]
 }
