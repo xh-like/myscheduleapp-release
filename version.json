@@ -1,6 +1,6 @@
 {
-  "versionCode": 81,
-  "versionName": "3.2.9",
+  "versionCode": 82,
+  "versionName": "3.3.0",
   "apkUrl": "https://ghfast.top/https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main/app-release.apk",
   "mirrors": [
     "https://ghfast.top/https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main/app-release.apk",
@@ -9,13 +9,15 @@
     "https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main/app-release.apk",
     "https://xh-like.github.io/myscheduleapp-release/app-release.apk"
   ],
-  "size": 11032171,
-  "sha256": "04f253a238817e7ed9c790530c02e07bc8ec308b68100113318253426b790463",
+  "size": 11039655,
+  "sha256": "49855d280b8efd9c42e38b5dd5592232025b097a87e450efd51c8fd7a9c6c9d6",
   "force": false,
-  "publishedAt": "2026-11-03 21:30",
+  "publishedAt": "2026-11-04 12:14",
   "notes": [
-    "移除邮箱功能：待办页的「邮箱」卡片、账号配置弹窗、IMAP 拉取（含内置邮箱账号与授权码）全部删除",
-    "安装包不再包含 JavaMail 依赖，体积略有变化，其余功能不变",
-    "老规则不变：3.1 及更早版本需要先卸载再安装，3.2.x 可以直接覆盖更新"
+    "日期条改为一栏七天：左右滑动一次翻七天，选中的日期自动跟随，不再露出半截日期",
+    "计划页新增「今天」按钮；近期夜班改为卡片样式，并删除日期下方的日期/项数小字与「未来 N 天」",
+    "页面切换加入淡入 + 轻微横向过渡；所有卡片改为半透明磨砂质感（浅色/深色均适配）",
+    "设置：账号区块移到外观上方，账号下只留呼吸状态点（登录绿色、未登录红色），删除版本副标题",
+    "日志会记录排班差异（新增/修改/删除的具体日期），老规则不变：3.1 及更早版本需先卸载再安装"
   ]
 }
