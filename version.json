@@ -1,6 +1,6 @@
 {
-  "versionCode": 82,
-  "versionName": "3.3.0",
+  "versionCode": 83,
+  "versionName": "3.3.1",
   "apkUrl": "https://ghfast.top/https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main/app-release.apk",
   "mirrors": [
     "https://ghfast.top/https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main/app-release.apk",
@@ -9,11 +9,12 @@
     "https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main/app-release.apk",
     "https://xh-like.github.io/myscheduleapp-release/app-release.apk"
   ],
-  "size": 11039655,
-  "sha256": "49855d280b8efd9c42e38b5dd5592232025b097a87e450efd51c8fd7a9c6c9d6",
+  "size": 11048111,
+  "sha256": "6d2f2d8d9630b382d116a66a67ec225d578c17a5c09cea21e08c4aa3f21acca4",
   "force": false,
-  "publishedAt": "2026-11-04 12:14",
+  "publishedAt": "2026-11-05 22:16",
   "notes": [
+    "首页日历下方新增「车控室外线电话」，点击弹出选号页面，选择站点后直接打开拨号界面",
     "日期条改为一栏七天：左右滑动一次翻七天，选中的日期自动跟随，不再露出半截日期",
     "计划页新增「今天」按钮；近期夜班改为卡片样式，并删除日期下方的日期/项数小字与「未来 N 天」",
     "页面切换加入淡入 + 轻微横向过渡；所有卡片改为半透明磨砂质感（浅色/深色均适配）",
