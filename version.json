@@ -1,6 +1,6 @@
 {
-  "versionCode": 83,
-  "versionName": "3.3.1",
+  "versionCode": 84,
+  "versionName": "3.3.2",
   "apkUrl": "https://ghfast.top/https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main/app-release.apk",
   "mirrors": [
     "https://ghfast.top/https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main/app-release.apk",
@@ -9,11 +9,12 @@
     "https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main/app-release.apk",
     "https://xh-like.github.io/myscheduleapp-release/app-release.apk"
   ],
-  "size": 11048111,
-  "sha256": "6d2f2d8d9630b382d116a66a67ec225d578c17a5c09cea21e08c4aa3f21acca4",
+  "size": 11050819,
+  "sha256": "a36a261a3c4cd967246ba025a4601095f5b6dc0bd26b994a7ef7724a89b47c8b",
   "force": false,
-  "publishedAt": "2026-11-05 22:16",
+  "publishedAt": "2026-11-05 22:46",
   "notes": [
+    "设置里新增「通知文案」：上班/下班打卡提醒的标题可自定义，通知内容支持 {站点}、{班次} 占位",
     "首页日历下方新增「车控室外线电话」，点击弹出选号页面，选择站点后直接打开拨号界面",
     "日期条改为一栏七天：左右滑动一次翻七天，选中的日期自动跟随，不再露出半截日期",
     "计划页新增「今天」按钮；近期夜班改为卡片样式，并删除日期下方的日期/项数小字与「未来 N 天」",
