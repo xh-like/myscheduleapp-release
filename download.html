@@ -3,123 +3,453 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>排班 App · 下载</title>
+<meta name="description" content="排班 - 排班月历 · 打卡提醒 · 待办管理，下载中心与使用说明。">
+<title>排班 · 下载中心</title>
 <style>
   :root {
-    --bg: #f5f6fa;
+    --bg: #f6f7fb;
     --card: #ffffff;
-    --text: #1b1f2a;
-    --sub: #6b7280;
-    --line: #e8eaf0;
-    --accent: #2f6bff;
+    --ink: #1a1d29;
+    --ink-soft: #5b6172;
+    --ink-faint: #8a90a3;
+    --brand: #4f46e5;
+    --brand-2: #7c3aed;
+    --accent: #f59e0b;
     --fast: #12a150;
     --warn: #c2410c;
+    --line: #eaecf3;
+    --radius: 16px;
+    --shadow: 0 8px 30px rgba(26, 29, 41, 0.08);
+    --shadow-sm: 0 2px 10px rgba(26, 29, 41, 0.06);
   }
-  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
   body {
-    margin: 0; padding: 28px 16px 60px;
-    background: var(--bg); color: var(--text);
-    font: 15px/1.6 -apple-system, "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+      "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
   }
-  .wrap { max-width: 620px; margin: 0 auto; }
-  h1 { font-size: 22px; margin: 0 0 6px; letter-spacing: .5px; }
-  .meta { color: var(--sub); font-size: 13px; margin-bottom: 22px; }
-  .card {
-    background: var(--card); border: 1px solid var(--line);
-    border-radius: 16px; padding: 18px; margin-bottom: 14px;
-    box-shadow: 0 6px 18px rgba(24,39,75,.05);
+  a { color: inherit; text-decoration: none; }
+
+  /* ---------- 顶部导航 ---------- */
+  header {
+    position: sticky; top: 0; z-index: 50;
+    backdrop-filter: saturate(180%) blur(12px);
+    background: rgba(255, 255, 255, 0.82);
+    border-bottom: 1px solid var(--line);
   }
-  .card h2 { font-size: 14px; margin: 0 0 14px; color: var(--sub); font-weight: 500; letter-spacing: .5px; }
-  a.dl {
-    display: flex; align-items: center; justify-content: space-between;
-    gap: 12px; text-decoration: none; color: inherit;
-    border: 1px solid var(--line); border-radius: 12px;
-    padding: 14px 16px; margin-bottom: 10px; background: #fbfcfe;
-    transition: border-color .15s, transform .15s, background .15s;
+  .nav {
+    max-width: 1080px; margin: 0 auto;
+    padding: 14px 24px;
+    display: flex; align-items: center; gap: 14px;
   }
-  a.dl:hover { border-color: #c9d4ea; background: #f7f9ff; transform: translateY(-1px); }
-  a.dl.primary { border-color: #bcd0ff; background: #f2f6ff; }
-  .name { font-weight: 600; font-size: 15px; }
-  .desc { color: var(--sub); font-size: 12.5px; margin-top: 3px; }
-  .tag {
-    font-size: 12px; padding: 3px 9px; border-radius: 999px;
-    background: #eef2f9; color: var(--sub); white-space: nowrap;
+  .nav-logo { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 18px; }
+  .nav-logo .mark { width: 34px; height: 34px; }
+  .nav-links { margin-left: auto; display: flex; gap: 22px; align-items: center; }
+  .nav-links a { color: var(--ink-soft); font-size: 15px; transition: color .15s; }
+  .nav-links a:hover { color: var(--brand); }
+  .nav-cta {
+    background: linear-gradient(135deg, var(--brand), var(--brand-2));
+    color: #fff !important; padding: 9px 18px; border-radius: 10px; font-weight: 600;
   }
-  .tag.good { background: #e6f6ec; color: var(--fast); }
-  .tag.slow { background: #fdeee5; color: var(--warn); }
-  .note { color: var(--sub); font-size: 13px; line-height: 1.75; }
-  .note b { color: var(--text); }
-  code {
-    background: #eef1f7; border-radius: 6px; padding: 1px 6px;
-    font-size: 12.5px; word-break: break-all;
+  .nav-cta:hover { opacity: .92; }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    background:
+      radial-gradient(1100px 500px at 85% -10%, rgba(124, 58, 237, 0.18), transparent 55%),
+      radial-gradient(900px 420px at 10% 0%, rgba(79, 70, 229, 0.16), transparent 50%),
+      linear-gradient(180deg, #ffffff, #f4f5fb);
+    padding: 64px 24px 52px;
+    text-align: center;
   }
-  .foot { text-align: center; color: #9aa3b2; font-size: 12px; margin-top: 26px; }
+  .hero .app-icon {
+    width: 88px; height: 88px; margin: 0 auto 20px;
+    border-radius: 22px;
+    box-shadow: 0 14px 34px rgba(79, 70, 229, 0.28);
+  }
+  .hero h1 { font-size: 42px; letter-spacing: -.5px; line-height: 1.15; }
+  .hero .tagline { margin-top: 12px; color: var(--ink-soft); font-size: 18px; }
+  .hero .ver {
+    display: inline-flex; align-items: center; gap: 8px;
+    margin-top: 18px; padding: 6px 14px;
+    background: #fff; border: 1px solid var(--line); border-radius: 999px;
+    color: var(--ink-faint); font-size: 13px;
+  }
+  .hero .ver b { color: var(--brand); font-weight: 700; }
+  .hero .dot { width: 7px; height: 7px; border-radius: 50%; background: #22c55e; }
+
+  .download-actions { margin-top: 32px; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: linear-gradient(135deg, var(--brand), var(--brand-2));
+    color: #fff; font-size: 17px; font-weight: 700;
+    padding: 16px 42px; border-radius: 14px;
+    box-shadow: 0 10px 28px rgba(79, 70, 229, 0.35);
+    transition: transform .15s, box-shadow .15s;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 14px 34px rgba(79, 70, 229, 0.42); }
+  .btn-primary svg { width: 20px; height: 20px; }
+  .hint { color: var(--ink-faint); font-size: 13px; }
+
+  /* ---------- 通用容器 ---------- */
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+  section { padding: 52px 0; }
+  .sec-head { text-align: center; margin-bottom: 34px; }
+  .sec-head h2 { font-size: 28px; letter-spacing: -.3px; }
+  .sec-head p { color: var(--ink-soft); margin-top: 8px; font-size: 16px; }
+
+  /* ---------- 下载线路 ---------- */
+  .mirrors {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px;
+  }
+  .mirror {
+    background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 20px; box-shadow: var(--shadow-sm);
+    transition: transform .15s, box-shadow .15s, border-color .15s;
+  }
+  .mirror:hover { transform: translateY(-3px); box-shadow: var(--shadow); border-color: var(--brand); }
+  .mirror .m-name { font-weight: 700; font-size: 16px; display: flex; align-items: center; gap: 8px; }
+  .mirror .m-tag {
+    font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 999px;
+    background: #eef2ff; color: var(--brand); white-space: nowrap;
+  }
+  .mirror .m-tag.fast { background: #e6f6ec; color: var(--fast); }
+  .mirror .m-tag.mid  { background: #eef2f9; color: var(--ink-soft); }
+  .mirror .m-tag.slow { background: #fdeee5; color: var(--warn); }
+  .mirror .m-desc { color: var(--ink-faint); font-size: 13px; margin: 8px 0 14px; min-height: 38px; }
+  .mirror a.btn-dl {
+    display: block; text-align: center; padding: 10px; border-radius: 10px;
+    background: #f4f4f9; color: var(--brand); font-weight: 600; font-size: 14px;
+    transition: background .15s;
+  }
+  .mirror a.btn-dl:hover { background: #e9e7fb; }
+
+  /* ---------- 提示 / 校验 ---------- */
+  .notice {
+    max-width: 760px; margin: 18px auto 0;
+    background: #fff; border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 20px 22px; box-shadow: var(--shadow-sm);
+  }
+  .notice h3 { font-size: 15px; margin-bottom: 10px; }
+  .notice .note { color: var(--ink-soft); font-size: 14px; line-height: 1.8; }
+  .notice .note b { color: var(--ink); }
+  .notice code {
+    background: #f0f1f7; border-radius: 6px; padding: 1px 6px;
+    font-size: 13px; color: #6d28d9; word-break: break-all;
+  }
+  .notice.warn { border-color: #fde0cf; background: #fffaf5; }
+  .notice.warn h3 { color: var(--warn); }
+
+  /* ---------- 功能特点 ---------- */
+  .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
+  .feature {
+    background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 26px 22px; box-shadow: var(--shadow-sm);
+  }
+  .feature .f-icon { width: 46px; height: 46px; border-radius: 13px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
+  .feature .f-icon svg { width: 24px; height: 24px; }
+  .feature h3 { font-size: 17px; margin-bottom: 8px; }
+  .feature p { color: var(--ink-soft); font-size: 14px; }
+
+  .ic-indigo { background: #eef2ff; color: #4f46e5; }
+  .ic-amber  { background: #fffbeb; color: #d97706; }
+  .ic-emerald{ background: #ecfdf5; color: #059669; }
+  .ic-sky    { background: #f0f9ff; color: #0284c7; }
+  .ic-rose   { background: #fff1f2; color: #e11d48; }
+  .ic-violet { background: #f5f3ff; color: #7c3aed; }
+
+  /* ---------- 使用说明 ---------- */
+  .steps { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; }
+  .step { display: flex; gap: 18px; position: relative; padding-bottom: 34px; }
+  .step::before {
+    content: ""; position: absolute; left: 23px; top: 50px; bottom: 0;
+    width: 2px; background: var(--line);
+  }
+  .step:last-child::before { display: none; }
+  .step-num {
+    flex: 0 0 auto; width: 48px; height: 48px; border-radius: 14px;
+    background: linear-gradient(135deg, var(--brand), var(--brand-2));
+    color: #fff; font-weight: 800; font-size: 19px;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 8px 18px rgba(79, 70, 229, 0.25);
+  }
+  .step-body { padding-top: 2px; }
+  .step-body h3 { font-size: 17px; margin-bottom: 6px; }
+  .step-body p { color: var(--ink-soft); font-size: 15px; }
+  .step-body code {
+    background: #f0f1f7; border-radius: 6px; padding: 2px 6px;
+    font-size: 13px; color: #6d28d9;
+  }
+
+  /* ---------- 页脚 ---------- */
+  footer {
+    border-top: 1px solid var(--line); padding: 40px 24px; text-align: center;
+    color: var(--ink-faint); font-size: 13px;
+  }
+  footer .f-logo { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; color: var(--ink); font-size: 15px; margin-bottom: 10px; }
+  footer .f-logo .mark { width: 22px; height: 22px; }
+
+  @media (max-width: 640px) {
+    .nav-links a:not(.nav-cta) { display: none; }
+    .hero { padding: 46px 20px 40px; }
+    .hero h1 { font-size: 32px; }
+    .btn-primary { padding: 15px 30px; font-size: 16px; }
+    section { padding: 40px 0; }
+    .sec-head h2 { font-size: 24px; }
+  }
 </style>
 </head>
 <body>
-<div class="wrap">
-  <h1>排班 App</h1>
-  <div class="meta" id="meta">正在读取版本信息…</div>
 
-  <div class="card">
-    <h2>选择下载线路</h2>
+<!-- 顶部导航 -->
+<header>
+  <div class="nav">
+    <div class="nav-logo">
+      <svg class="mark" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+        <defs>
+          <linearGradient id="g" x1="0" y1="0" x2="48" y2="48">
+            <stop offset="0" stop-color="#4f46e5"/><stop offset="1" stop-color="#7c3aed"/>
+          </linearGradient>
+        </defs>
+        <rect x="2" y="6" width="44" height="40" rx="10" fill="url(#g)"/>
+        <rect x="8" y="13" width="32" height="7" rx="3.5" fill="#fff" opacity=".95"/>
+        <rect x="8" y="26" width="9" height="6" rx="3" fill="#fcd34d"/>
+        <rect x="20" y="26" width="9" height="6" rx="3" fill="#fff" opacity=".85"/>
+        <rect x="32" y="26" width="8" height="6" rx="3" fill="#93c5fd"/>
+        <rect x="8" y="35" width="9" height="6" rx="3" fill="#fff" opacity=".85"/>
+        <rect x="20" y="35" width="9" height="6" rx="3" fill="#93c5fd"/>
+        <rect x="32" y="35" width="8" height="6" rx="3" fill="#fcd34d"/>
+      </svg>
+      排班
+    </div>
+    <nav class="nav-links">
+      <a href="#download">下载</a>
+      <a href="#features">功能</a>
+      <a href="#guide">使用说明</a>
+      <a href="#download" class="nav-cta">立即下载</a>
+    </nav>
+  </div>
+</header>
 
-    <a class="dl primary" id="l1" href="#">
-      <div>
-        <div class="name">加速线路 ①（推荐）</div>
-        <div class="desc">国内中转，实测约 0.9 MB/s，11 MB 约 12 秒</div>
-      </div>
-      <span class="tag good">最快</span>
-    </a>
-
-    <a class="dl" id="l2" href="#">
-      <div>
-        <div class="name">加速线路 ②</div>
-        <div class="desc">jsDelivr CDN，实测约 150 KB/s，约 1 分半</div>
-      </div>
-      <span class="tag">较稳</span>
-    </a>
-
-    <a class="dl" id="l3" href="#">
-      <div>
-        <div class="name">加速线路 ③</div>
-        <div class="desc">gh-proxy 中转，线路①不通时可试</div>
-      </div>
-      <span class="tag">备用</span>
-    </a>
-
-    <a class="dl" id="l4" href="#">
-      <div>
-        <div class="name">GitHub 官方地址</div>
-        <div class="desc">不经过任何中转，海外网络用这条更合适</div>
-      </div>
-      <span class="tag slow">国内较慢</span>
-    </a>
+<!-- Hero -->
+<section class="hero">
+  <svg class="app-icon" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+    <defs>
+      <linearGradient id="g2" x1="0" y1="0" x2="48" y2="48">
+        <stop offset="0" stop-color="#4f46e5"/><stop offset="1" stop-color="#7c3aed"/>
+      </linearGradient>
+    </defs>
+    <rect width="48" height="48" rx="11" fill="url(#g2)"/>
+    <rect x="5" y="8" width="38" height="35" rx="9" fill="#fff" fill-opacity=".16"/>
+    <rect x="10" y="14" width="28" height="6" rx="3" fill="#fff"/>
+    <rect x="10" y="24" width="7" height="5" rx="2.5" fill="#fcd34d"/>
+    <rect x="19" y="24" width="7" height="5" rx="2.5" fill="#fff" opacity=".9"/>
+    <rect x="28" y="24" width="7" height="5" rx="2.5" fill="#93c5fd"/>
+    <rect x="10" y="31" width="7" height="5" rx="2.5" fill="#fff" opacity=".9"/>
+    <rect x="19" y="31" width="7" height="5" rx="2.5" fill="#93c5fd"/>
+    <rect x="28" y="31" width="7" height="5" rx="2.5" fill="#fcd34d"/>
+  </svg>
+  <h1>排班</h1>
+  <p class="tagline">排班月历 · 打卡提醒 · 待办管理</p>
+  <div class="ver">
+    <span class="dot"></span>
+    当前版本 <b id="verName">读取中…</b> · 适配 Android 8.0 及以上
   </div>
 
-  <div class="card">
-    <h2>安装提示</h2>
-    <div class="note">
-      · 下载得到的文件是 <b>app-release.apk</b>，点击即可安装，需要允许「安装未知来源应用」。<br>
-      · 从 <b>3.1 或更早</b> 升级的用户：新版签名与旧版不同，<b>必须先卸载旧版再安装</b>，否则会提示「应用未安装」。卸载后数据仍在云端，登录即可同步。<br>
-      · 已装 3.2.x 的用户可以直接覆盖安装，不需要卸载。
+  <div class="download-actions" id="download">
+    <a class="btn-primary" id="d1" href="#">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
+      立即下载 APK
+    </a>
+    <span class="hint" id="meta">正在读取版本信息…</span>
+  </div>
+</section>
+
+<!-- 下载线路 + 提示 + 校验 -->
+<section class="wrap" id="mirrors">
+  <div class="sec-head">
+    <h2>选择下载线路</h2>
+    <p>安装包完全一致，某条线路慢或不通时换一条即可</p>
+  </div>
+  <div class="mirrors">
+    <div class="mirror">
+      <div class="m-name">加速线路 ① <span class="m-tag fast">推荐 · 最快</span></div>
+      <div class="m-desc">国内中转，实测约 0.9 MB/s，11 MB 约 12 秒</div>
+      <a class="btn-dl" id="l1" href="#">下载 APK</a>
+    </div>
+    <div class="mirror">
+      <div class="m-name">加速线路 ② <span class="m-tag mid">较稳</span></div>
+      <div class="m-desc">jsDelivr CDN，实测约 150 KB/s，约 1 分半</div>
+      <a class="btn-dl" id="l2" href="#">下载 APK</a>
+    </div>
+    <div class="mirror">
+      <div class="m-name">加速线路 ③ <span class="m-tag mid">备用</span></div>
+      <div class="m-desc">gh-proxy 中转，线路 ① 不通时可试</div>
+      <a class="btn-dl" id="l3" href="#">下载 APK</a>
+    </div>
+    <div class="mirror">
+      <div class="m-name">GitHub 官方地址 <span class="m-tag slow">国内较慢</span></div>
+      <div class="m-desc">不经过任何中转，海外网络用这条更合适</div>
+      <a class="btn-dl" id="l4" href="#">下载 APK</a>
     </div>
   </div>
 
-  <div class="card">
-    <h2>文件校验</h2>
-    <div class="note" id="sum">读取中…</div>
+  <div class="notice warn">
+    <h3>安装提示</h3>
+    <div class="note">
+      · 下载得到的文件是 <b>app-release.apk</b>，点击即可安装，需要允许「安装未知来源应用」。<br>
+      · 从 <b>3.1 或更早</b> 升级的用户：新版签名与旧版不同，<b>必须先卸载旧版再安装</b>，否则会提示「应用未安装」。卸载后数据仍在云端，登录即可同步。<br>
+      · 已装 <b>3.2.x 或更新</b> 版本的用户可直接覆盖安装，无需卸载。
+    </div>
   </div>
 
-  <div class="foot">排班 App · 个人使用</div>
-</div>
+  <div class="notice">
+    <h3>文件校验</h3>
+    <div class="note" id="sum">读取中…</div>
+  </div>
+</section>
+
+<!-- 功能特点 -->
+<section class="wrap" id="features">
+  <div class="sec-head">
+    <h2>核心功能</h2>
+    <p>为倒班、值班与排班场景打造</p>
+  </div>
+  <div class="features">
+    <div class="feature">
+      <div class="f-icon ic-indigo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="17" rx="3"/><path d="M8 2v4M16 2v4M3 9h18"/></svg>
+      </div>
+      <h3>排班月历</h3>
+      <p>月历按班次着色，白班、夜班、夜值、休息一眼区分，自动汇总当月总工时。</p>
+    </div>
+    <div class="feature">
+      <div class="f-icon ic-amber">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+      </div>
+      <h3>打卡提醒</h3>
+      <p>按当天班次自动安排上班前 / 下班后提醒，通知标题与文案均可自定义。</p>
+    </div>
+    <div class="feature">
+      <div class="f-icon ic-emerald">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h11"/></svg>
+      </div>
+      <h3>待办事项</h3>
+      <p>记录与标记待办，数据按账号独立保存，切换账号互不干扰。</p>
+    </div>
+    <div class="feature">
+      <div class="f-icon ic-sky">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 6h13M8 12h13M8 18h13"/><path d="M3 6h.01M3 12h.01M3 18h.01"/></svg>
+      </div>
+      <h3>计划提醒</h3>
+      <p>每条值班计划在开始前 10 分钟自动提醒，不遗漏每一次交接。</p>
+    </div>
+    <div class="feature">
+      <div class="f-icon ic-violet">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="8" height="8" rx="2"/><rect x="13" y="3" width="8" height="8" rx="2"/><rect x="3" y="13" width="8" height="8" rx="2"/><rect x="13" y="13" width="8" height="8" rx="2"/></svg>
+      </div>
+      <h3>桌面小组件</h3>
+      <p>桌面月历小组件按班次着色、有计划加圆点，锁屏即可查看今日班次。</p>
+    </div>
+    <div class="feature">
+      <div class="f-icon ic-rose">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 0 1-9 9 9 9 0 0 1-9-9 9 9 0 0 1 9-9"/><path d="M21 3v6h-6"/></svg>
+      </div>
+      <h3>自动更新</h3>
+      <p>应用内一键检查更新，多加速源自动切换，快速获取最新版本。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 使用说明 -->
+<section class="wrap" id="guide">
+  <div class="sec-head">
+    <h2>使用说明</h2>
+    <p>从下载到开始使用，只需简单几步</p>
+  </div>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <h3>下载并安装</h3>
+        <p>点击上方任一「下载」按钮下载 APK。打开安装包，系统提示时允许「安装未知来源应用」，完成安装。</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <h3>授予必要权限</h3>
+        <p>首次启动时允许「通知」权限，确保打卡提醒与计划提醒能正常弹出；Android 13+ 首次启动会主动申请。</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <h3>登录并同步排班</h3>
+        <p>进入「设置」填写账号并登录，登录成功后 App 会自动拉取并同步你的排班表。</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <h3>查看月历与工时</h3>
+        <p>在首页「排班」标签按班次着色查看当月安排，顶部汇总当月总工时（白班 + 夜班 + 任务）。</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-body">
+        <h3>配置打卡提醒</h3>
+        <p>在「设置」中开启上班 / 下班打卡提醒，并可自定义通知标题与内容模板，支持 <code>{站点}</code>、<code>{班次}</code> 占位符自动替换。</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">6</div>
+      <div class="step-body">
+        <h3>添加桌面小组件</h3>
+        <p>长按手机桌面 → 添加小组件 → 选择「排班月历与近期安排」，无需打开 App 即可查看当月排班与今日班次。</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">7</div>
+      <div class="step-body">
+        <h3>检查更新</h3>
+        <p>在「设置 → 检查更新」中随时检测最新版本；应用也会在合适时机自动提醒有新版本可下载。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 页脚 -->
+<footer>
+  <div class="f-logo">
+    <svg class="mark" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+      <defs><linearGradient id="g3" x1="0" y1="0" x2="48" y2="48"><stop offset="0" stop-color="#4f46e5"/><stop offset="1" stop-color="#7c3aed"/></linearGradient></defs>
+      <rect width="48" height="48" rx="11" fill="url(#g3)"/>
+      <rect x="10" y="14" width="28" height="6" rx="3" fill="#fff"/>
+      <rect x="10" y="24" width="7" height="5" rx="2.5" fill="#fcd34d"/>
+      <rect x="19" y="24" width="7" height="5" rx="2.5" fill="#fff"/>
+      <rect x="28" y="24" width="7" height="5" rx="2.5" fill="#93c5fd"/>
+    </svg>
+    排班
+  </div>
+  <p>排班月历 · 打卡提醒 · 待办管理</p>
+  <p style="margin-top:8px;">当前版本 <span id="footVer">…</span> · 适配 Android 8.0 及以上</p>
+</footer>
 
 <script>
   const RAW = "https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main";
   const JSD = "https://cdn.jsdelivr.net/gh/xh-like/myscheduleapp-release@main";
   const PAGES = "https://xh-like.github.io/myscheduleapp-release";
 
-  document.getElementById("l1").href = "https://ghfast.top/" + RAW + "/app-release.apk";
+  // 下载线路：主按钮与线路卡指向同一套餐
+  const accel1 = "https://ghfast.top/" + RAW + "/app-release.apk";
+  document.getElementById("d1").href = accel1;
+  document.getElementById("l1").href = accel1;
   document.getElementById("l2").href = JSD + "/app-release.apk";
   document.getElementById("l3").href = "https://gh-proxy.com/" + RAW + "/app-release.apk";
   document.getElementById("l4").href = PAGES + "/app-release.apk";
@@ -127,12 +457,16 @@
   fetch(PAGES + "/version.json?t=" + Date.now())
     .then(r => r.json())
     .then(v => {
-      document.getElementById("meta").textContent =
-        "版本 " + v.versionName + " · " + (v.size / 1048576).toFixed(1) + " MB · 发布于 " + v.publishedAt;
+      const size = (v.size / 1048576).toFixed(1);
+      const ver = v.versionName + " · " + size + " MB · 发布于 " + v.publishedAt;
+      document.getElementById("verName").textContent = v.versionName;
+      document.getElementById("footVer").textContent = v.versionName;
+      document.getElementById("meta").textContent = "版本 " + v.versionName + " · " + size + " MB · 约 " + size + " MB，点击即下";
       document.getElementById("sum").innerHTML =
         "SHA-256：<br><code>" + v.sha256 + "</code><br><br>下载完成后如需核对，可用任意哈希工具比对，不一致说明文件损坏，请换线路重下。";
     })
     .catch(() => {
+      document.getElementById("verName").textContent = "v3.x";
       document.getElementById("meta").textContent = "版本信息读取失败，可直接点上面的线路下载";
       document.getElementById("sum").textContent = "暂时无法读取校验值。";
     });
