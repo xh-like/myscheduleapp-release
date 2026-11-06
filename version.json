@@ -1,6 +1,6 @@
 {
-  "versionCode": 99,
-  "versionName": "3.3.17",
+  "versionCode": 100,
+  "versionName": "3.3.18",
   "apkUrl": "https://ghfast.top/https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main/app-release.apk",
   "mirrors": [
     "https://ghfast.top/https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main/app-release.apk",
@@ -9,11 +9,12 @@
     "https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main/app-release.apk",
     "https://xh-like.github.io/myscheduleapp-release/app-release.apk"
   ],
-  "size": 11076127,
-  "sha256": "b360c9925a3c5559a036b0efffe88971a1b9d7a2169b55da75749255e13e4be9",
+  "size": 11075467,
+  "sha256": "691ca65aa1424b33fdaed49a2ab1d2a5999fcfa20231a006a9ba19de74b239c2",
   "force": false,
-  "publishedAt": "2026-11-06 22:30",
+  "publishedAt": "2026-11-06 22:47",
   "notes": [
+    "检查更新改为多源取最高版本，加速镜像与 raw 优先：任一源确认有新版立即提示，不再被 Pages / jsDelivr 旧缓存误判为已是最新",
     "常用功能页三张卡片的点击水波纹统一为整卡范围与相同圆角（车控室外线电话、LMIS账号、巡检倒计时）",
     "使用人数统计改为每台手机只记录一次，今日 / 累计按设备去重；统计面板仍仅 17737071019 账号可见",
     "设置中打卡提醒的通知标题与内容支持自定义，可用 {站点}、{班次} 占位符",
