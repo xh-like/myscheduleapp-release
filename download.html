@@ -128,7 +128,7 @@
   }
   .mirror a.btn-dl:hover { background: #e9e7fb; }
 
-  /* ---------- 提示 / 校验 ---------- */
+  /* ---------- 提示 ---------- */
   .notice {
     max-width: 760px; margin: 18px auto 0;
     background: #fff; border: 1px solid var(--line); border-radius: var(--radius);
@@ -269,7 +269,7 @@
   </div>
 </section>
 
-<!-- 下载线路 + 提示 + 校验 -->
+<!-- 下载线路 + 提示 -->
 <section class="wrap" id="mirrors">
   <div class="sec-head">
     <h2>选择下载线路</h2>
@@ -305,11 +305,6 @@
       · 从 <b>3.1 或更早</b> 升级的用户：新版签名与旧版不同，<b>必须先卸载旧版再安装</b>，否则会提示「应用未安装」。卸载后数据仍在云端，登录即可同步。<br>
       · 已装 <b>3.2.x 或更新</b> 版本的用户可直接覆盖安装，无需卸载。
     </div>
-  </div>
-
-  <div class="notice">
-    <h3>文件校验</h3>
-    <div class="note" id="sum">读取中…</div>
   </div>
 </section>
 
@@ -354,13 +349,6 @@
       </div>
       <h3>桌面小组件</h3>
       <p>桌面月历小组件按班次着色、有计划加圆点，锁屏即可查看今日班次。</p>
-    </div>
-    <div class="feature">
-      <div class="f-icon ic-rose">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 0 1-9 9 9 9 0 0 1-9-9 9 9 0 0 1 9-9"/><path d="M21 3v6h-6"/></svg>
-      </div>
-      <h3>自动更新</h3>
-      <p>应用内一键检查更新，多加速源自动切换，快速获取最新版本。</p>
     </div>
   </div>
 </section>
@@ -462,13 +450,10 @@
       document.getElementById("verName").textContent = v.versionName;
       document.getElementById("footVer").textContent = v.versionName;
       document.getElementById("meta").textContent = "版本 " + v.versionName + " · " + size + " MB · 约 " + size + " MB，点击即下";
-      document.getElementById("sum").innerHTML =
-        "SHA-256：<br><code>" + v.sha256 + "</code><br><br>下载完成后如需核对，可用任意哈希工具比对，不一致说明文件损坏，请换线路重下。";
     })
     .catch(() => {
       document.getElementById("verName").textContent = "v3.x";
       document.getElementById("meta").textContent = "版本信息读取失败，可直接点上面的线路下载";
-      document.getElementById("sum").textContent = "暂时无法读取校验值。";
     });
 </script>
 </body>
