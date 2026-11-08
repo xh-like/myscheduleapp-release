@@ -9,11 +9,14 @@
     "https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main/app-release.apk",
     "https://xh-like.github.io/myscheduleapp-release/app-release.apk"
   ],
-  "size": 11075467,
-  "sha256": "691ca65aa1424b33fdaed49a2ab1d2a5999fcfa20231a006a9ba19de74b239c2",
+  "size": 11430836,
+  "sha256": "87bcfbcb7dfd17805a7eaa951bdc61925efa1d7df48c84ee207495cf4ee98a78",
   "force": false,
-  "publishedAt": "2026-11-06 22:47",
+  "publishedAt": "2026-11-08 13:22",
   "notes": [
+    "修复小部件日期显示错误：星期表头与日期网格错位一天",
+    "待办内容改为本地统一保存，切换账号不再影响待办",
+    "签名已变更，旧版本需要卸载后再安装",
     "优化更新通道",
     "常用功能页三张卡片的点击水波纹统一为整卡范围与相同圆角（车控室外线电话、LMIS账号、巡检倒计时）",
     "使用人数统计改为每台手机只记录一次，今日 / 累计按设备去重；统计面板仍仅 17737071019 账号可见",
