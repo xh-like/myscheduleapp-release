@@ -9,11 +9,14 @@
     "https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main/app-release.apk",
     "https://xh-like.github.io/myscheduleapp-release/app-release.apk"
   ],
-  "size": 11430836,
-  "sha256": "87bcfbcb7dfd17805a7eaa951bdc61925efa1d7df48c84ee207495cf4ee98a78",
+  "size": 11435007,
+  "sha256": "d1810f93309bc23d71d7f14fc5c5129f92498091dc5bd6893a7e7474621e2f34",
   "force": false,
-  "publishedAt": "2026-11-08 13:22",
+  "publishedAt": "2026-11-08 20:09",
   "notes": [
+    "启动改为独立登录页：进入 App 先登录，账号默认留空，密码默认 econworx@YX1",
+    "登录后自动进入主页，账号信息随登录操作立即生效",
+    "本包含小部件日期错位修复与待办本地保存；签名已变更，旧版本需要卸载后再安装",
     "修复小部件日期显示错误：星期表头与日期网格错位一天",
     "待办内容改为本地统一保存，切换账号不再影响待办",
     "签名已变更，旧版本需要卸载后再安装",
