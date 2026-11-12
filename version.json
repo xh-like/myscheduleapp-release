@@ -1,20 +1,20 @@
 {
-    "versionCode":  102,
-    "versionName":  "3.3.20",
-    "apkUrl":  "https://ghfast.top/https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main/app-release.apk",
-    "mirrors":  [
-                    "https://ghfast.top/https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main/app-release.apk",
-                    "https://gh-proxy.com/https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main/app-release.apk",
-                    "https://cdn.jsdelivr.net/gh/xh-like/myscheduleapp-release@main/app-release.apk",
-                    "https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main/app-release.apk",
-                    "https://xh-like.github.io/myscheduleapp-release/app-release.apk"
-                ],
-    "size":  11472887,
-    "sha256":  "6ACC923F638058BBFBADFC473C98CD87253BF602E8EC08BD9FA7FA476FE9CE4A",
-    "force":  false,
-    "publishedAt":  "2026-11-09 13:23",
-    "notes":  [
-                  "优化日志描述",
-                  "修复上班打卡无提醒"
-              ]
+    "versionCode": 103,
+    "versionName": "3.3.21",
+    "apkUrl": "https://ghfast.top/https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main/app-release.apk",
+    "mirrors": [
+        "https://ghfast.top/https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main/app-release.apk",
+        "https://gh-proxy.com/https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main/app-release.apk",
+        "https://cdn.jsdelivr.net/gh/xh-like/myscheduleapp-release@main/app-release.apk",
+        "https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main/app-release.apk",
+        "https://xh-like.github.io/myscheduleapp-release/app-release.apk"
+    ],
+    "size": 11472887,
+    "sha256": "1BF1655A7559184C9741627D86E491AEC655E6B95040635F9F0998409E1F9340",
+    "force": false,
+    "publishedAt": "2026-11-12 18:27",
+    "notes": [
+        "日历新增每月10号发薪日图标",
+        "日历每周三显示五防巡检"
+    ]
 }
