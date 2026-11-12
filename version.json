@@ -10,12 +10,12 @@
         "https://xh-like.github.io/myscheduleapp-release/app-release.apk"
     ],
     "size": 11472887,
-    "sha256": "286D1E6A6EE727F4E1393FA2359E220E6E554945F416820D2E77C228D01DA31E",
+    "sha256": "FB1720CDBF81FDB3D38231DED86265E2A68A184DA5A1C60FE0AA4754215CCE90",
     "force": false,
-    "publishedAt": "2026-11-12 19:21",
+    "publishedAt": "2026-11-12 19:29",
     "notes": [
         "日历新增每月10号发薪日图标",
-        "日历每周三显示五防巡检",
-        "修复五防巡检文字在带班次格子中被遮挡"
+        "日历每周三右上角显示「五防」标记",
+        "修复五防文字在带班次格子中被遮挡"
     ]
 }
