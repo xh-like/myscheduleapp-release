@@ -1,6 +1,6 @@
 {
-    "versionCode": 105,
-    "versionName": "3.3.23",
+    "versionCode": 106,
+    "versionName": "3.3.24",
     "apkUrl": "https://ghfast.top/https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main/app-release.apk",
     "mirrors": [
         "https://ghfast.top/https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main/app-release.apk",
@@ -10,12 +10,13 @@
         "https://xh-like.github.io/myscheduleapp-release/app-release.apk"
     ],
     "size": 11477041,
-    "sha256": "D3230BB500FD5E5B62460C7EC8A2A831C343C4C00F0A3C882404233915F78DE1",
+    "sha256": "F5B03EC5BB0BFE77D606DEB435A9F6198CDABB84D6E542CC7BD55F9F39699B3A",
     "force": false,
-    "publishedAt": "2026-11-13 10:23",
+    "publishedAt": "2026-11-13 18:34",
     "notes": [
-        "巡检倒计时新增后台保活：退出应用后在通知栏持续显示剩余时间",
-        "巡检结束或失效后通知栏倒计时自动停止并清除",
-        "开机/更新/系统时间变化后自动续算倒计时"
+        "修复 3.3.23 巡检倒计时注入导致的启动闪退",
+        "巡检结束或状态清空时自动清除通知栏常驻倒计时",
+        "修复后台服务重复启动造成的计时任务累积",
+        "本版本更换签名证书，安装前请先卸载旧版（详见下载页提醒）"
     ]
 }
