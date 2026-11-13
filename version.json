@@ -1,6 +1,6 @@
 {
-    "versionCode": 104,
-    "versionName": "3.3.22",
+    "versionCode": 105,
+    "versionName": "3.3.23",
     "apkUrl": "https://ghfast.top/https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main/app-release.apk",
     "mirrors": [
         "https://ghfast.top/https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main/app-release.apk",
@@ -9,13 +9,13 @@
         "https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main/app-release.apk",
         "https://xh-like.github.io/myscheduleapp-release/app-release.apk"
     ],
-    "size": 11472887,
-    "sha256": "FB1720CDBF81FDB3D38231DED86265E2A68A184DA5A1C60FE0AA4754215CCE90",
+    "size": 11477041,
+    "sha256": "D3230BB500FD5E5B62460C7EC8A2A831C343C4C00F0A3C882404233915F78DE1",
     "force": false,
-    "publishedAt": "2026-11-12 19:29",
+    "publishedAt": "2026-11-13 10:23",
     "notes": [
-        "日历新增每月10号发薪日图标",
-        "日历每周三右上角显示「五防」标记",
-        "修复五防文字在带班次格子中被遮挡"
+        "巡检倒计时新增后台保活：退出应用后在通知栏持续显示剩余时间",
+        "巡检结束或失效后通知栏倒计时自动停止并清除",
+        "开机/更新/系统时间变化后自动续算倒计时"
     ]
 }
