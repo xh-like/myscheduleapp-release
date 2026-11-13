@@ -256,7 +256,7 @@
   <p class="tagline">排班月历 · 打卡提醒 · 待办管理</p>
   <div class="ver">
     <span class="dot"></span>
-    当前版本 <b id="verName">读取中…</b> · 适配 Android 8.0 及以上
+    当前版本 <b id="verName">3.3.24</b> · 适配 Android 8.0 及以上
   </div>
 
   <div class="download-actions" id="download">
@@ -264,7 +264,7 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
       立即下载 APK
     </a>
-    <span class="hint" id="meta">正在读取版本信息…</span>
+    <span class="hint" id="meta">版本 3.3.24 · 约 10.9 MB，点击即下</span>
   </div>
 </section>
 
@@ -297,12 +297,22 @@
     </div>
   </div>
 
+  <div class="notice warn" style="border-color:#fecaca;background:#fff5f5;border-left:4px solid #dc2626;">
+    <h3 style="color:#b91c1c;">⚠️ 重要提醒 · 3.3.24 紧急修复版</h3>
+    <div class="note">
+      · <b>3.3.23 存在启动闪退问题</b>，已安装该版本的用户请立即下载本页最新版重新安装；旧版打不开 App，<b>不会收到「检查更新」提示</b>，请直接在本页面下载。<br>
+      · 本版本<b>更换了应用签名证书</b>：<b>所有旧版用户（含 3.2.x 及更新版本）都必须先卸载手机上已安装的版本，再安装本版本</b>，否则会提示「应用未安装」。<br>
+      · 因签名变更，旧版本 App 内「检查更新」下载后也无法覆盖安装，请统一从本页手动下载安装。<br>
+      · 卸载不会丢失数据：重新安装后登录原账号，排班表会自动从云端同步。
+    </div>
+  </div>
+
   <div class="notice warn">
     <h3>安装提示</h3>
     <div class="note">
       · 下载得到的文件是 <b>app-release.apk</b>，点击即可安装，需要允许「安装未知来源应用」。<br>
-      · 从 <b>3.1 或更早</b> 升级的用户：新版签名与旧版不同，<b>必须先卸载旧版再安装</b>，否则会提示「应用未安装」。卸载后数据仍在云端，登录即可同步。<br>
-      · 已装 <b>3.2.x 或更新</b> 版本的用户可直接覆盖安装，无需卸载。
+      · 安装时若手机管家提示「有病毒 / 风险应用」：本应用为内部侧载、使用自签名证书，并包含开机自启、前台服务、通知与安装未知应用权限，属于常见误报，选择「仍要安装」即可。<br>
+      · 适配 Android 8.0 及以上；首次启动请允许「通知」权限，确保打卡与计划提醒正常弹出。
     </div>
   </div>
 </section>
@@ -360,7 +370,7 @@
       <div class="step-num">7</div>
       <div class="step-body">
         <h3>检查更新</h3>
-        <p>在「设置 → 检查更新」中随时检测最新版本；应用也会在合适时机自动提醒有新版本可下载。</p>
+        <p>在「设置 → 检查更新」中随时检测最新版本；应用也会在合适时机自动提醒有新版本可下载。<b>3.3.24 因更换签名证书，旧版本无法直接覆盖更新，请到本下载页手动下载安装。</b></p>
       </div>
     </div>
   </div>
@@ -380,7 +390,7 @@
     排班
   </div>
   <p>排班月历 · 打卡提醒 · 待办管理</p>
-  <p style="margin-top:8px;">当前版本 <span id="footVer">…</span> · 适配 Android 8.0 及以上</p>
+  <p style="margin-top:8px;">当前版本 <span id="footVer">3.3.24</span> · 适配 Android 8.0 及以上</p>
 </footer>
 
 <script>
@@ -406,7 +416,7 @@
       document.getElementById("meta").textContent = "版本 " + v.versionName + " · " + size + " MB · 约 " + size + " MB，点击即下";
     })
     .catch(() => {
-      document.getElementById("verName").textContent = "v3.x";
+      document.getElementById("verName").textContent = "3.3.24";
       document.getElementById("meta").textContent = "版本信息读取失败，可直接点上面的线路下载";
     });
 </script>
