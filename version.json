@@ -1,6 +1,6 @@
 {
-    "versionCode": 106,
-    "versionName": "3.3.24",
+    "versionCode": 107,
+    "versionName": "3.3.25",
     "apkUrl": "https://ghfast.top/https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main/app-release.apk",
     "mirrors": [
         "https://ghfast.top/https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main/app-release.apk",
@@ -10,13 +10,14 @@
         "https://xh-like.github.io/myscheduleapp-release/app-release.apk"
     ],
     "size": 11477041,
-    "sha256": "F5B03EC5BB0BFE77D606DEB435A9F6198CDABB84D6E542CC7BD55F9F39699B3A",
+    "sha256": "19A7A490A81261278D6CF13A5840A45F52AA60C90FC48CAC54A2050953E7DB07",
     "force": false,
-    "publishedAt": "2026-11-13 18:34",
+    "publishedAt": "2026-11-14 15:23",
     "notes": [
-        "修复 3.3.23 巡检倒计时注入导致的启动闪退",
-        "巡检结束或状态清空时自动清除通知栏常驻倒计时",
-        "修复后台服务重复启动造成的计时任务累积",
-        "本版本更换签名证书，安装前请先卸载旧版（详见下载页提醒）"
+        "本月概览新增 BJ1 工时统计：当月有 BJ1 排班才显示，无数据自动隐藏",
+        "计划页新增「近期白班」区块，仅显示 BJ1 排班；原有「近期夜班」保持不变",
+        "底部悬浮导航栏改为白色圆角胶囊样式（大圆角、左右留白、轻阴影）",
+        "与 3.3.24 使用相同签名证书，可直接覆盖安装，无需卸载",
+        "3.3.23 及更早版本仍需先卸载旧版再安装（详见下载页说明）"
     ]
 }
