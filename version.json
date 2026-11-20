@@ -1,6 +1,6 @@
 {
-    "versionCode": 107,
-    "versionName": "3.3.25",
+    "versionCode": 108,
+    "versionName": "3.3.26",
     "apkUrl": "https://ghfast.top/https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main/app-release.apk",
     "mirrors": [
         "https://ghfast.top/https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main/app-release.apk",
@@ -10,14 +10,13 @@
         "https://xh-like.github.io/myscheduleapp-release/app-release.apk"
     ],
     "size": 11477041,
-    "sha256": "19A7A490A81261278D6CF13A5840A45F52AA60C90FC48CAC54A2050953E7DB07",
+    "sha256": "2F8EB48A0D4E6AD1D636B9FF29BEED2E134CFC5B0B59F2B157B6DCF9CC14B6B4",
     "force": false,
-    "publishedAt": "2026-11-14 15:23",
+    "publishedAt": "2026-11-20 15:57",
     "notes": [
-        "本月概览新增 BJ1 工时统计：当月有 BJ1 排班才显示，无数据自动隐藏",
-        "计划页新增「近期白班」区块，仅显示 BJ1 排班；原有「近期夜班」保持不变",
-        "底部悬浮导航栏改为白色圆角胶囊样式（大圆角、左右留白、轻阴影）",
-        "与 3.3.24 使用相同签名证书，可直接覆盖安装，无需卸载",
+        "日历新增日期角标：每月 1 号显示「劳保」、5 号显示「地线」",
+        "日期角标放在日期格左上角，与右上角「五防」「工资」角标错开，互不遮挡",
+        "与 3.3.24 / 3.3.25 使用相同签名证书，可直接覆盖安装，无需卸载",
         "3.3.23 及更早版本仍需先卸载旧版再安装（详见下载页说明）"
     ]
 }
