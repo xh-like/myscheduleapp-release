@@ -1,6 +1,6 @@
 {
-    "versionCode": 109,
-    "versionName": "3.3.27",
+    "versionCode": 110,
+    "versionName": "3.3.28",
     "apkUrl": "https://ghfast.top/https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main/app-release.apk",
     "mirrors": [
         "https://ghfast.top/https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main/app-release.apk",
@@ -9,14 +9,12 @@
         "https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main/app-release.apk",
         "https://xh-like.github.io/myscheduleapp-release/app-release.apk"
     ],
-    "size": 11477041,
-    "sha256": "40A5C51D7C9A283F8CBCB01029C31B188E92DBBBC6D27D76CEBADD2925FCC7B1",
+    "size": 11518067,
+    "sha256": "70B6018619D38536B2CC4494501B1162B5BE60B3A195C9EE7732002C81D250B1",
     "force": false,
-    "publishedAt": "2026-11-20 19:39",
+    "publishedAt": "2026-11-24 17:07",
     "notes": [
-        "修复 3.3.26 日期角标错乱问题：1 号原误显「地线」、5 号原误显「劳保」，现已更正为 1 号「劳保」、5 号「地线」",
-        "修复后其它日期不再错误显示日期角标，与右上角「五防」「工资」角标互不遮挡",
-        "与 3.3.24 / 3.3.25 / 3.3.26 使用相同签名证书，可直接覆盖安装，无需卸载",
-        "3.3.23 及更早版本仍需先卸载旧版再安装（详见下载页说明）"
+        "1、优化本月概览工时显示",
+        "2、新增绩效表一键生成"
     ]
 }
