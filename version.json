@@ -1,6 +1,6 @@
 {
-    "versionCode": 111,
-    "versionName": "3.3.29",
+    "versionCode": 112,
+    "versionName": "3.3.30",
     "apkUrl": "https://ghfast.top/https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main/app-release.apk",
     "mirrors": [
         "https://ghfast.top/https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main/app-release.apk",
@@ -9,13 +9,12 @@
         "https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main/app-release.apk",
         "https://xh-like.github.io/myscheduleapp-release/app-release.apk"
     ],
-    "size": 11559176,
-    "sha256": "1D11627FEDFC65F3E990D6220655B498322522D3200CAD8D5550B073B5EB4F88",
+    "size": 11559319,
+    "sha256": "BFF3CFAE23919F8CF637155A4453882DA062C9D2ADC6A1707797958EEBE81B85",
     "force": false,
-    "publishedAt": "2026-11-26 16:11",
+    "publishedAt": "2026-11-26 17:31",
     "notes": [
-        "1、新增工器具表格：支持云端表格、在线预览与 Excel 导出",
-        "2、优化页面切换动画，采用 Material Design 3 规范",
-        "3、修复已知问题，优化体验"
+        "1、全局页面切换动画升级为淡入淡出穿透效果（Material Fade-Through）",
+        "2、常用功能子页面转场动画同步优化，切换更流畅自然"
     ]
 }
