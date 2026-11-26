@@ -1,6 +1,6 @@
 {
-    "versionCode": 114,
-    "versionName": "3.4",
+    "versionCode": 115,
+    "versionName": "3.4.1",
     "apkUrl": "https://ghfast.top/https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main/app-release.apk",
     "mirrors": [
         "https://ghfast.top/https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main/app-release.apk",
@@ -10,9 +10,9 @@
         "https://xh-like.github.io/myscheduleapp-release/app-release.apk"
     ],
     "size": 11559385,
-    "sha256": "F57DF4A1DE7C13C686E482A8BD8C7641D83FE8CE8B2EC87AA2B78373D31DD469",
+    "sha256": "FA1EA6C626877E79E6291182D1CE6C224FC92673FCC519A100538B1CD4FF7AD9",
     "force": false,
-    "publishedAt": "2026-11-26 20:42",
+    "publishedAt": "2026-11-26 20:47",
     "notes": [
         "1、优化过渡动画，页面切换更流畅",
         "2、一键生成绩效表 UI 优化",
