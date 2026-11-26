@@ -1,6 +1,6 @@
 {
-    "versionCode": 112,
-    "versionName": "3.3.30",
+    "versionCode": 113,
+    "versionName": "3.3.31",
     "apkUrl": "https://ghfast.top/https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main/app-release.apk",
     "mirrors": [
         "https://ghfast.top/https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main/app-release.apk",
@@ -10,11 +10,11 @@
         "https://xh-like.github.io/myscheduleapp-release/app-release.apk"
     ],
     "size": 11559319,
-    "sha256": "BFF3CFAE23919F8CF637155A4453882DA062C9D2ADC6A1707797958EEBE81B85",
+    "sha256": "F983D6B952DE62ECE5F6E96ABF8C9D6395144736B2363A134F52973C154D8B5D",
     "force": false,
-    "publishedAt": "2026-11-26 17:31",
+    "publishedAt": "2026-11-26 17:54",
     "notes": [
-        "1、全局页面切换动画升级为淡入淡出穿透效果（Material Fade-Through）",
-        "2、常用功能子页面转场动画同步优化，切换更流畅自然"
+        "1、修复常用功能子页面切换时的闪屏问题",
+        "2、页面切换动画保持淡入淡出穿透效果，过渡更流畅"
     ]
 }
