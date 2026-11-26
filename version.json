@@ -1,6 +1,6 @@
 {
-    "versionCode": 113,
-    "versionName": "3.3.31",
+    "versionCode": 114,
+    "versionName": "3.4",
     "apkUrl": "https://ghfast.top/https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main/app-release.apk",
     "mirrors": [
         "https://ghfast.top/https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main/app-release.apk",
@@ -9,12 +9,13 @@
         "https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main/app-release.apk",
         "https://xh-like.github.io/myscheduleapp-release/app-release.apk"
     ],
-    "size": 11559319,
-    "sha256": "F983D6B952DE62ECE5F6E96ABF8C9D6395144736B2363A134F52973C154D8B5D",
+    "size": 11559385,
+    "sha256": "F57DF4A1DE7C13C686E482A8BD8C7641D83FE8CE8B2EC87AA2B78373D31DD469",
     "force": false,
-    "publishedAt": "2026-11-26 17:54",
+    "publishedAt": "2026-11-26 20:42",
     "notes": [
-        "1、修复常用功能子页面切换时的闪屏问题",
-        "2、页面切换动画保持淡入淡出穿透效果，过渡更流畅"
+        "1、优化过渡动画，页面切换更流畅",
+        "2、一键生成绩效表 UI 优化",
+        "3、新增工器具清点单"
     ]
 }
