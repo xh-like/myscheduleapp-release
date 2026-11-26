@@ -1,6 +1,6 @@
 {
-    "versionCode": 115,
-    "versionName": "3.4.1",
+    "versionCode": 116,
+    "versionName": "3.5",
     "apkUrl": "https://ghfast.top/https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main/app-release.apk",
     "mirrors": [
         "https://ghfast.top/https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main/app-release.apk",
@@ -9,13 +9,13 @@
         "https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main/app-release.apk",
         "https://xh-like.github.io/myscheduleapp-release/app-release.apk"
     ],
-    "size": 11559385,
-    "sha256": "FA1EA6C626877E79E6291182D1CE6C224FC92673FCC519A100538B1CD4FF7AD9",
+    "size": 11575844,
+    "sha256": "138F2DEE2A7488DD2D36822A9D12545A02BA609B84A20431CB49DB949FEDF59D",
     "force": false,
-    "publishedAt": "2026-11-26 20:47",
+    "publishedAt": "2026-11-26 21:43",
     "notes": [
-        "1、优化过渡动画，页面切换更流畅",
-        "2、一键生成绩效表 UI 优化",
-        "3、新增工器具清点单"
+        "1、工器具清单改用 GitHub RAW 源，发布后即时可见",
+        "2、新增「在线监测小修」工器具表",
+        "3、绩效生成与工器具预览页底部改为悬浮栏，界面优化"
     ]
 }
