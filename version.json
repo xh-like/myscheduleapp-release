@@ -1,6 +1,6 @@
 {
-    "versionCode": 116,
-    "versionName": "3.5",
+    "versionCode": 117,
+    "versionName": "3.5.1",
     "apkUrl": "https://ghfast.top/https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main/app-release.apk",
     "mirrors": [
         "https://ghfast.top/https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main/app-release.apk",
@@ -10,12 +10,10 @@
         "https://xh-like.github.io/myscheduleapp-release/app-release.apk"
     ],
     "size": 11575844,
-    "sha256": "138F2DEE2A7488DD2D36822A9D12545A02BA609B84A20431CB49DB949FEDF59D",
+    "sha256": "5D888276BDF58BEE96B1FB68B54FE6791E65CB46511AF03262B887816A1D8D2F",
     "force": false,
-    "publishedAt": "2026-11-26 21:43",
+    "publishedAt": "2026-11-26 22:17",
     "notes": [
-        "1、工器具清单改用 GitHub RAW 源，发布后即时可见",
-        "2、新增「在线监测小修」工器具表",
-        "3、绩效生成与工器具预览页底部改为悬浮栏，界面优化"
+        "1、修复计划重复刷新"
     ]
 }
