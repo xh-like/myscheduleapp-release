@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>工器具表格 · 远程管理</title>
+<style>
+  :root{
+    --bg:#F4F6F9; --card:#FFFFFF; --text:#0F1521; --sub:#5B6B84;
+    --border:#E6EDF7; --accent:#3B6EF6; --chip:#EDF2FB;
+    --danger:#E5484D; --ok:#16A34A; --grad:#D5DEF8;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,"Segoe UI","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.6;padding:24px 16px 60px}
+  .wrap{max-width:960px;margin:0 auto}
+  header{background:linear-gradient(135deg,#D5DEF8,#EDF2FB);border-radius:16px;padding:24px 28px;margin-bottom:20px;border:1px solid #C9D6F5}
+  header h1{font-size:22px;font-weight:700}
+  header p{color:var(--sub);font-size:13px;margin-top:6px}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px 22px;margin-bottom:18px}
+  .card h2{font-size:16px;font-weight:700;margin-bottom:14px;padding-left:10px;border-left:4px solid var(--accent)}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:none;border-radius:10px;padding:9px 16px;font-size:13px;font-weight:600;cursor:pointer;transition:.15s}
+  .btn:hover{opacity:.88;transform:translateY(-1px)}
+  .btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+  .btn-p{background:var(--accent);color:#fff}
+  .btn-o{background:#fff;color:var(--accent);border:1px solid var(--accent)}
+  .btn-g{background:var(--chip);color:var(--accent)}
+  .btn-d{background:#FEF2F2;color:var(--danger);border:1px solid #FECACA}
+  .btn-sm{padding:6px 12px;font-size:12px;border-radius:8px}
+  .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+  input[type=text]{border:1px solid var(--border);border-radius:9px;padding:9px 12px;font-size:14px;flex:1;min-width:180px;outline:none}
+  input[type=text]:focus{border-color:var(--accent)}
+  input[type=file]{display:none}
+  .doc-item{border:1px solid var(--border);border-radius:12px;padding:14px 16px;margin-bottom:12px;background:#FBFCFF}
+  .doc-head{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .num{width:30px;height:30px;border-radius:8px;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex-shrink:0}
+  .doc-name{font-weight:700;font-size:15px;flex:1;min-width:160px}
+  .doc-name input{font-weight:700;font-size:15px;width:100%;border:1px dashed var(--border);border-radius:6px;padding:4px 8px}
+  .meta{font-size:12px;color:var(--sub);margin-left:42px;margin-top:6px}
+  .sheet-tags{display:flex;gap:6px;flex-wrap:wrap;margin-left:42px;margin-top:6px}
+  .tag{background:var(--chip);color:var(--accent);font-size:11px;padding:2px 9px;border-radius:20px}
+  .tag.empty{background:#F1F5F9;color:#94A3B8;text-decoration:line-through}
+  table{width:100%;border-collapse:collapse;font-size:13px;margin-top:10px}
+  th,td{border:1px solid var(--border);padding:7px 10px;text-align:left}
+  th{background:var(--chip);font-weight:600;color:var(--sub)}
+  .json-box{background:#0F1521;color:#A5D6FF;border-radius:10px;padding:14px;font-family:Consolas,Monaco,monospace;font-size:12px;max-height:260px;overflow:auto;white-space:pre-wrap;word-break:break-all}
+  .status{padding:10px 14px;border-radius:9px;font-size:13px;margin-top:12px;display:none}
+  .status.ok{display:block;background:#F0FDF4;color:var(--ok);border:1px solid #BBF7D0}
+  .status.err{display:block;background:#FEF2F2;color:var(--danger);border:1px solid #FECACA}
+  .status.info{display:block;background:var(--chip);color:var(--accent);border:1px solid #C9D6F5}
+  .hint{font-size:12px;color:var(--sub);margin-top:8px}
+  .step{display:flex;gap:10px;align-items:flex-start;margin-bottom:12px}
+  .step-n{width:24px;height:24px;border-radius:50%;background:var(--accent);color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+  .drop{border:2px dashed #C9D6F5;border-radius:12px;padding:28px;text-align:center;color:var(--sub);cursor:pointer;transition:.15s;margin-top:10px}
+  .drop:hover{border-color:var(--accent);background:#F8FAFF}
+  .preview-file{background:var(--chip);border-radius:9px;padding:10px 14px;font-size:13px;margin-top:10px;color:var(--accent);display:none}
+  .banner{background:#FFFBEB;border:1px solid #FDE68A;color:#92400E;border-radius:10px;padding:10px 14px;font-size:12px;margin-bottom:16px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>工器具表格 · 远程管理</h1>
+    <p>在这里添加/更新表格，一键发布到云端，App 内点「从服务器刷新表格清单」即可生效，无需重新打包 APK。</p>
+  </header>
+
+  <div class="banner">🔑 发布需要 GitHub Token（与 App 发布脚本同一个）。填写一次后保存在本浏览器，之后不用再填。</div>
+
+  <!-- 1. 当前云端清单 -->
+  <div class="card">
+    <h2>① 当前云端清单</h2>
+    <div class="row">
+      <button class="btn btn-o btn-sm" onclick="loadRemote()">🔄 刷新</button>
+      <span class="hint" id="loadTime"></span>
+    </div>
+    <div id="docList" style="margin-top:10px"></div>
+  </div>
+
+  <!-- 2. 添加新表格 -->
+  <div class="card">
+    <h2>② 添加新表格（上传 Excel 自动解析）</h2>
+    <div class="drop" id="drop" onclick="document.getElementById('file').click()">
+      <div style="font-size:28px;margin-bottom:6px">📄</div>
+      <div>点击选择或拖拽 xls / xlsx 文件到此处</div>
+      <div class="hint">自动读取所有 sheet，识别序号/名称/规格，跳过没有工具的空白页</div>
+    </div>
+    <input type="file" id="file" accept=".xls,.xlsx">
+    <div class="preview-file" id="fileInfo"></div>
+    <div id="parsedPreview" style="margin-top:14px"></div>
+    <div class="row" style="margin-top:12px">
+      <input type="text" id="newName" placeholder="表格显示名称（如：低压开关柜小修）">
+      <button class="btn btn-p" id="btnAdd" onclick="addDoc()" disabled>＋ 添加到清单</button>
+    </div>
+  </div>
+
+  <!-- 3. 生成并发布 -->
+  <div class="card">
+    <h2>③ 生成并发布</h2>
+    <div class="row">
+      <button class="btn btn-g" onclick="genJSON()">生成 index.json 预览</button>
+      <button class="btn btn-o" onclick="downloadJSON()">⬇ 下载 JSON</button>
+      <button class="btn btn-p" onclick="publishAll()">🚀 一键发布到云端</button>
+    </div>
+    <div class="json-box" id="jsonBox" style="margin-top:14px">点击「生成 index.json 预览」查看结果…</div>
+    <div class="row" style="margin-top:12px">
+      <input type="password" id="pat" placeholder="GitHub Token（填一次自动记住）" autocomplete="off" onchange="saveToken()">
+      <button class="btn btn-d btn-sm" onclick="clearToken()">清除</button>
+    </div>
+    <div id="status" class="status"></div>
+  </div>
+</div>
+
+<script src="xlsx.full.min.js"></script>
+<script>
+const REPO = 'xh-like/myscheduleapp-release';
+const BRANCH = 'main';
+const CDN = 'https://cdn.jsdelivr.net/gh/' + REPO + '@' + BRANCH + '/toolbox/';
+const RAW = 'https://raw.githubusercontent.com/' + REPO + '/' + BRANCH + '/toolbox/';
+let docs = [];           // 当前清单
+let pending = null;      // 待添加的解析结果 {id, name, file, sheets, workbook}
+let jsdelivrOK = true;
+
+const TOKEN_KEY = 'toolbox_gh_token';
+function loadToken(){
+  try { const t = localStorage.getItem(TOKEN_KEY); if(t) document.getElementById('pat').value = t; } catch(e){}
+}
+function saveToken(){
+  try {
+    const t = document.getElementById('pat').value.trim();
+    if(t) { localStorage.setItem(TOKEN_KEY, t); showStatus('Token 已保存在本浏览器', 'ok'); }
+    else { localStorage.removeItem(TOKEN_KEY); }
+  } catch(e){ showStatus('浏览器不允许本地存储', 'err'); }
+}
+function clearToken(){
+  try { localStorage.removeItem(TOKEN_KEY); } catch(e){}
+  document.getElementById('pat').value = '';
+  showStatus('Token 已清除', 'info');
+}
+
+function showStatus(msg, type='info'){
+  const s = document.getElementById('status');
+  s.className = 'status ' + type; s.textContent = msg;
+  s.scrollIntoView({behavior:'smooth', block:'nearest'});
+}
+
+async function loadRemote(){
+  showStatus('正在从云端加载清单…', 'info');
+  let text = null;
+  for (const url of [CDN+'index.json', RAW+'index.json']) {
+    try {
+      const r = await fetch(url + '?t=' + Date.now());
+      if (r.ok) { text = await r.text(); jsdelivrOK = url.startsWith(CDN); break; }
+    } catch(e){}
+  }
+  if (!text) { showStatus('云端加载失败，请检查网络', 'err'); return; }
+  try {
+    docs = JSON.parse(text);
+    renderDocs();
+    document.getElementById('loadTime').textContent = '加载时间：' + new Date().toLocaleString();
+    showStatus('已加载 ' + docs.length + ' 个表格', 'ok');
+  } catch(e){ showStatus('清单格式错误：' + e.message, 'err'); }
+}
+
+function renderDocs(){
+  const box = document.getElementById('docList');
+  if (!docs.length) { box.innerHTML = '<div class="hint">清单为空，请在下方添加表格</div>'; return; }
+  box.innerHTML = docs.map((d,i) =>
+    '<div class="row" style="justify-content:space-between;padding:9px 12px;border:1px solid var(--border);border-radius:9px;margin-bottom:7px;background:#FBFCFF">' +
+    '<span><b style="color:var(--accent);margin-right:8px">'+(i+1)+'</b>'+esc(d.name)+' <span class="hint">· 可见 '+visibleCount(d)+' 页</span></span>' +
+    '<button class="btn btn-d btn-sm" onclick="removeDoc('+i+')">删除</button></div>'
+  ).join('');
+}
+function visibleCount(d){ return (d.sheets||[]).filter(s=>(s.items||[]).length>0).length; }
+function removeDoc(i){ if(!confirm('确定删除「'+docs[i].name+'」？')) return; docs.splice(i,1); renderDocs(); genJSON(); }
+function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+// ===== 上传与解析 =====
+const fileInput = document.getElementById('file');
+const drop = document.getElementById('drop');
+fileInput.addEventListener('change', e => { if(e.target.files[0]) parseFile(e.target.files[0]); });
+drop.addEventListener('dragover', e => { e.preventDefault(); drop.style.borderColor = '#3B6EF6'; });
+drop.addEventListener('dragleave', () => { drop.style.borderColor = ''; });
+drop.addEventListener('drop', e => {
+  e.preventDefault(); drop.style.borderColor = '';
+  if(e.dataTransfer.files[0]) parseFile(e.dataTransfer.files[0]);
+});
+
+function parseFile(file){
+  showStatus('正在解析 ' + file.name + ' …', 'info');
+  const reader = new FileReader();
+  reader.onload = function(e){
+    try {
+      const wb = XLSX.read(new Uint8Array(e.target.result), {type:'array'});
+      const sheets = [];
+      wb.SheetNames.forEach((sn, idx) => {
+        const ws = wb.Sheets[sn];
+        const rows = XLSX.utils.sheet_to_json(ws, {header:1, defval:''});
+        const items = [];
+        // 从第3行(索引2)开始，A列=序号 B列=名称 C列=规格；到第30行(索引29)
+        for (let r = 2; r < Math.min(rows.length, 30); r++) {
+          const row = rows[r];
+          const no = String(row[0]||'').trim();
+          const name = String(row[1]||'').trim();
+          const unit = String(row[2]||'').trim();
+          if (name && no) items.push(no + '|' + name + '|' + unit);
+        }
+        sheets.push({title:'工器具清单（' + (idx+1) + '）', items: items, _sheetName: sn});
+      });
+      // 文件名去掉扩展名作为默认名称
+      const base = file.name.replace(/\.(xls|xlsx)$/i, '');
+      const id = 'toolbox_' + base.replace(/[^\w\u4e00-\u9fa5]/g, '_').toLowerCase();
+      pending = {id, name:base, file:id + '.xlsx', sheets, workbook:wb};
+      document.getElementById('fileInfo').style.display = 'block';
+      document.getElementById('fileInfo').textContent = '✓ 已解析 ' + file.name + '：' + sheets.length + ' 个 sheet，共 ' + sheets.reduce((a,s)=>a+s.items.length,0) + ' 项工具';
+      document.getElementById('btnAdd').disabled = false;
+      document.getElementById('newName').value = base;
+      renderParsed();
+      showStatus('解析完成，请确认后添加到清单', 'ok');
+    } catch(err) {
+      showStatus('解析失败：' + err.message, 'err');
+    }
+  };
+  reader.readAsArrayBuffer(file);
+}
+
+function renderParsed(){
+  if (!pending) return;
+  const box = document.getElementById('parsedPreview');
+  box.innerHTML = pending.sheets.map((s,i) =>
+    '<div style="margin:8px 0"><label><input type="checkbox" id="ps'+i+'" '+(s.items.length?'checked':'')+' onchange="toggleSheet('+i+',this.checked)"> <b>'+esc(s.title)+'</b></label> ' +
+    '<span class="hint">'+s.items.length+' 项'+(s.items.length?'':'（空页，将不显示）')+'</span>' +
+    (s.items.length ? '<table><tr><th>序号</th><th>名称</th><th>规格</th></tr>' +
+      s.items.slice(0,5).map(it=>{const p=it.split('|');return '<tr><td>'+esc(p[0])+'</td><td>'+esc(p[1])+'</td><td>'+esc(p[2])+'</td></tr>';}).join('') +
+      (s.items.length>5?'<tr><td colspan="3" class="hint">… 共 '+s.items.length+' 项</td></tr>':'') + '</table>' : '') + '</div>'
+  ).join('');
+}
+function toggleSheet(i, checked){ pending.sheets[i]._enabled = checked; }
+
+function addDoc(){
+  if (!pending) return;
+  const name = document.getElementById('newName').value.trim() || pending.name;
+  const sheets = pending.sheets.filter(s => s._enabled !== false).map(s => ({title:s.title, items:s.items}));
+  const newDoc = {id:pending.id, name:name, file:pending.file, sheets:sheets, _workbook:pending.workbook};
+  // 若已存在同 id，替换；否则追加
+  const exist = docs.findIndex(d => d.id === newDoc.id);
+  if (exist >= 0) docs[exist] = newDoc; else docs.push(newDoc);
+  renderDocs(); genJSON();
+  pending = null;
+  document.getElementById('fileInfo').style.display = 'none';
+  document.getElementById('parsedPreview').innerHTML = '';
+  document.getElementById('btnAdd').disabled = true;
+  showStatus('已添加到清单，记得点「一键发布」生效', 'ok');
+}
+
+// ===== 生成 JSON =====
+function cleanDocs(){ return docs.map(d => ({id:d.id, name:d.name, file:d.file, sheets:(d.sheets||[]).map(s=>({title:s.title, items:s.items||[]}))})); }
+function genJSON(){
+  const json = JSON.stringify(cleanDocs(), null, 2);
+  document.getElementById('jsonBox').textContent = json;
+  return json;
+}
+function downloadJSON(){
+  const blob = new Blob([genJSON()], {type:'application/json'});
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+  a.download = 'index.json'; a.click();
+}
+
+// ===== 一键发布 =====
+function b64(buf){
+  return new Promise(res => {
+    const r = new FileReader();
+    r.onload = () => res(r.result.split(',')[1]);
+    r.readAsDataURL(new Blob([buf]));
+  });
+}
+async function ghApi(method, path, body, token){
+  const r = await fetch('https://api.github.com/repos/' + REPO + '/contents/' + path, {
+    method, headers:{'Authorization':'Bearer '+token,'Accept':'application/vnd.github+json','Content-Type':'application/json'},
+    body: body ? JSON.stringify(body) : undefined
+  });
+  const text = await r.text();
+  return {ok:r.ok, status:r.status, data:text};
+}
+async function ghPut(path, bytes, msg, token){
+  let sha = null;
+  const old = await ghApi('GET', path, null, token);
+  if (old.ok) { try { sha = JSON.parse(old.data).sha; } catch(e){} }
+  const payload = {message:msg, content:await b64(bytes), branch:BRANCH};
+  if (sha) payload.sha = sha;
+  const res = await ghApi('PUT', path, payload, token);
+  if (!res.ok) throw new Error(path + ' 推送失败(' + res.status + '): ' + res.data.slice(0,200));
+  return res;
+}
+
+async function publishAll(){
+  const token = document.getElementById('pat').value.trim();
+  if (!token) { showStatus('请先填写 GitHub Token', 'err'); return; }
+  if (!docs.length) { showStatus('清单为空，没有可发布的内容', 'err'); return; }
+  if (!confirm('确定发布 ' + docs.length + ' 个表格到云端？App 用户刷新后即可看到。')) return;
+
+  try {
+    showStatus('① 上传 Excel 模板…', 'info');
+    for (const d of docs) {
+      let bytes = null;
+      if (d._workbook) {
+        bytes = XLSX.write(d._workbook, {bookType:'xlsx', type:'array'});
+      } else {
+        // 从云端下载现有模板原样回传
+        for (const base of [RAW, CDN]) {
+          try { const r = await fetch(base + d.file); if (r.ok) { bytes = await r.arrayBuffer(); break; } } catch(e){}
+        }
+      }
+      if (!bytes) throw new Error('找不到 ' + d.file + ' 的内容，请重新上传该表格');
+      await ghPut('toolbox/' + d.file, bytes, 'update ' + d.file, token);
+    }
+    showStatus('② 上传 index.json…', 'info');
+    const jsonBytes = new TextEncoder().encode(genJSON());
+    await ghPut('toolbox/index.json', jsonBytes, 'update toolbox index.json', token);
+    showStatus('③ 刷新 CDN 缓存…', 'info');
+    for (const name of ['index.json', ...docs.map(d=>d.file)]) {
+      try { await fetch('https://purge.jsdelivr.net/gh/'+REPO+'@'+BRANCH+'/toolbox/'+name); } catch(e){}
+    }
+    showStatus('✅ 发布成功！App 内点「从服务器刷新表格清单」即可看到更新。', 'ok');
+  } catch(e) {
+    showStatus('发布失败：' + e.message, 'err');
+  }
+}
+
+// 启动
+loadToken();
+loadRemote();
+</script>
+</body>
+</html>
