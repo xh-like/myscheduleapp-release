@@ -1,6 +1,6 @@
 {
-    "versionCode": 117,
-    "versionName": "3.5.1",
+    "versionCode": 118,
+    "versionName": "3.5.2",
     "apkUrl": "https://ghfast.top/https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main/app-release.apk",
     "mirrors": [
         "https://ghfast.top/https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main/app-release.apk",
@@ -10,9 +10,9 @@
         "https://xh-like.github.io/myscheduleapp-release/app-release.apk"
     ],
     "size": 11575844,
-    "sha256": "5D888276BDF58BEE96B1FB68B54FE6791E65CB46511AF03262B887816A1D8D2F",
+    "sha256": "2ABA26B4F07127E86D76DBD7C5CBFE67414DE5E51FF88B9D14BE2E44FF45B57B",
     "force": false,
-    "publishedAt": "2026-11-26 22:17",
+    "publishedAt": "2026-11-27 10:36",
     "notes": [
         "1、修复计划重复刷新"
     ]
