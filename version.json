@@ -1,6 +1,6 @@
 {
-    "versionCode": 118,
-    "versionName": "3.5.2",
+    "versionCode": 119,
+    "versionName": "3.5.3",
     "apkUrl": "https://ghfast.top/https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main/app-release.apk",
     "mirrors": [
         "https://ghfast.top/https://raw.githubusercontent.com/xh-like/myscheduleapp-release/main/app-release.apk",
@@ -10,10 +10,10 @@
         "https://xh-like.github.io/myscheduleapp-release/app-release.apk"
     ],
     "size": 11575844,
-    "sha256": "2ABA26B4F07127E86D76DBD7C5CBFE67414DE5E51FF88B9D14BE2E44FF45B57B",
+    "sha256": "CE1310D06120890340A7B0360535AC088847E08237CC2E9252DADEEC46676E4F",
     "force": false,
-    "publishedAt": "2026-11-27 10:36",
+    "publishedAt": "2026-11-27 10:58",
     "notes": [
-        "1、修复计划重复刷新"
+        "1、修复工器具导出失败，部分功能优化体验"
     ]
 }
